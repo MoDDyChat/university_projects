@@ -1,4 +1,4 @@
-#include "Operate.h"
+ï»¿#include "Operate.h"
 #include <windows.h>
 	
 int stop;
@@ -7,33 +7,33 @@ void menu() {
 	do {
 		char b[N + 1], a[N + 1], result[N + 1] = { 0 };
 
-		cout << "Ââåäèòå ïåðâîå ÷èñëî: ";
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿ÐµÑ€Ð²Ð¾Ðµ Ñ‡Ð¸ÑÐ»Ð¾: ";
 		input(a);
 
-		cout << "Ââåäèòå âòîðîå ÷èñëî: ";
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²Ñ‚Ð¾Ñ€Ð¾Ðµ Ñ‡Ð¸ÑÐ»Ð¾: ";
 		input(b);
 
-		cout << endl <<"Ñóììà ýòèõ ÷èñåë = ";
+		cout << endl <<"Ð¡ÑƒÐ¼Ð¼Ð° ÑÑ‚Ð¸Ñ… Ñ‡Ð¸ÑÐµÐ» = ";
 		add(result, a, b);
 		output(result);
 
-		cout << "Ðàçíîñòü ýòèõ ÷èñåë = ";
+		cout << "Ð Ð°Ð·Ð½Ð¾ÑÑ‚ÑŒ ÑÑ‚Ð¸Ñ… Ñ‡Ð¸ÑÐµÐ» = ";
 		sub(result, a, b);
 		output(result);
 
-		cout << "Ïðîèçâåäåíèå ýòèõ ÷èñåë = ";
+		cout << "ÐŸÑ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ ÑÑ‚Ð¸Ñ… Ñ‡Ð¸ÑÐµÐ» = ";
 		mult(result, a, b);
 		output(result);
 
 		for (int i = 0; i < N + 1; i++) result[i] = 0;
-		cout << "×àñòíîå ýòèõ ÷èñåë = ";
+		cout << "Ð§Ð°ÑÑ‚Ð½Ð¾Ðµ ÑÑ‚Ð¸Ñ… Ñ‡Ð¸ÑÐµÐ» = ";
 		degree(result, a, b);
 
-		cout << endl << "Ñóììà ýòèõ ÷èñåë = ";
+		cout << endl << "Ð¡ÑƒÐ¼Ð¼Ð° ÑÑ‚Ð¸Ñ… Ñ‡Ð¸ÑÐµÐ» = ";
 		add(result, a, b);
 		output(result);
 
-		cout << endl << "Ââåäèòå ëþáîé ñèìâîë, ÷òîáû çàâåðøèòü ðàáîòó: ";
+		cout << endl << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð»ÑŽÐ±Ð¾Ð¹ ÑÐ¸Ð¼Ð²Ð¾Ð», Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð·Ð°Ð²ÐµÑ€ÑˆÐ¸Ñ‚ÑŒ Ñ€Ð°Ð±Ð¾Ñ‚Ñƒ: ";
 		//degree(result, a, b);
 
 		getchar() == '\n' ? stop = 0 : stop = 1;

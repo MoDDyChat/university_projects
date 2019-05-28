@@ -1,10 +1,10 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <windows.h>
 
 using namespace std;
 const int N = 10000;
 
-//Поменять знак
+//РџРѕРјРµРЅСЏС‚СЊ Р·РЅР°Рє
 void changeSign(char a[]) {
 	for (int i = 0; i < N; ++i)
 		a[i] = 9 - a[i];
@@ -17,7 +17,7 @@ void changeSign(char a[]) {
 		}
 }
 
-//Ввод числа
+//Р’РІРѕРґ С‡РёСЃР»Р°
 void input(char a[]) {
 	char str[N + 2];
 	cin.getline(str, N + 2);
@@ -37,7 +37,7 @@ void input(char a[]) {
 		changeSign(a);
 }
 
-//Вывод числа
+//Р’С‹РІРѕРґ С‡РёСЃР»Р°
 void output(char a[]) {
 	int sign = 1;
 	if (a[N - 1] >= 5) {
@@ -53,7 +53,7 @@ void output(char a[]) {
 	printf("\n");
 }
 
-//Сложение
+//РЎР»РѕР¶РµРЅРёРµ
 void add(char imb[], char a[], char b[]) {
 	int r = 0;
 	for (int i = 0; i < N; ++i) {
@@ -63,14 +63,14 @@ void add(char imb[], char a[], char b[]) {
 	}
 }
 
-//Вычитание
+//Р’С‹С‡РёС‚Р°РЅРёРµ
 void sub(char imb[], char a[], char b[]) {
 	changeSign(b);
 	add(imb, a, b);
 	changeSign(b);
 }
 
-//Умножение
+//РЈРјРЅРѕР¶РµРЅРёРµ
 void mult(char res[], char a[], char b[]) {
 	for (int i = 0; i < N; ++i)
 		res[i] = 0;
@@ -82,7 +82,7 @@ void mult(char res[], char a[], char b[]) {
 		}
 }
 
-//Уменьшение на единицу
+//РЈРјРµРЅСЊС€РµРЅРёРµ РЅР° РµРґРёРЅРёС†Сѓ
 void decrease(char a[], char b[]) {
 	for (int i = 0; i < N; i++) {
 		if (a[i] >= b[i]) {
@@ -95,7 +95,7 @@ void decrease(char a[], char b[]) {
 	}
 }
 
-//Проверка на ноль
+//РџСЂРѕРІРµСЂРєР° РЅР° РЅРѕР»СЊ
 int checknull(char a[]) {
 	for (int i = 0; i < N; i++) {
 		if (a[i] != 0) return 0;
@@ -103,7 +103,7 @@ int checknull(char a[]) {
 	return 1;
 }
 
-//Сравнение чисел
+//РЎСЂР°РІРЅРµРЅРёРµ С‡РёСЃРµР»
 int compare(char a[], char b[]) {
 	char result1[N + 1] = { 0 };
 	sub(result1, a, b);
@@ -116,7 +116,7 @@ int compare(char a[], char b[]) {
 	}
 }
 
-//Деление
+//Р”РµР»РµРЅРёРµ
 void degree(char res[], char a[], char b[]) {
 	char t[N + 1] = { 0 };
 	bool signA, signB;

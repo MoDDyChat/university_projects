@@ -4,8 +4,6 @@
 # User-specific files
 *.suo
 *.user
-*.filters
-*.vcxproj
 *.sln.docstates
 
 # Build results
