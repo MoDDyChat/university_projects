@@ -15,7 +15,7 @@ void menu();
 void bCopy();
 
 int main(){
-	system("color 70");
+	system("color F0");
 	setlocale(LC_ALL, "Russian");
 
 	bCopy();
@@ -35,7 +35,7 @@ void menu() {
 	} while (in >= N);
 
 	do {
-		system("cls");
+		//system("cls");
 		cout << "Введите конечную точку пути (< " << N << "): ";
 		cin >> out;
 	} while (out >= N);
