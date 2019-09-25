@@ -16,11 +16,16 @@ namespace OOP_Lab3_1
         {
             InitializeComponent();
         }
-
+        
+        //переключение режима калькулятора (сложение/вычитание)
         int calMode = 0;
-        int timerSeconds = 0;
+
+        //Счётчик таймера
+        int timerSeconds = 0; 
 
         Random random = new Random();
+
+        //Меню программы
         private void menuBox_TextChanged(object sender, EventArgs e)
         {
             switch (menuBox.Text)
@@ -44,6 +49,7 @@ namespace OOP_Lab3_1
             } 
         }
 
+        //Добавить на форму объекты кальулятора
         private void loadCal()
         {
             this.Controls.Add(this.calModeBtn);
@@ -53,37 +59,14 @@ namespace OOP_Lab3_1
             this.Controls.Add(this.FirstNumber);
         }
 
+        //Добавить на форму объекты игры
         private void loadMouseGame()
         {
             this.Controls.Add(this.Mouse);
             gameMouseTimer.Enabled = true;
         }
 
-        private void unloadMouseGame()
-        {
-            this.Controls.Remove(this.Mouse);
-            this.Controls.Remove(this.winPicture);
-            this.Controls.Remove(this.gameRestart);
-            gameMouseTimer.Enabled = false;
-        }
-
-        private void unloadAll()
-        {
-            unloadCal();
-            unloadMouseGame();
-            unloadTimer();
-            this.Controls.Remove(this.CatBox);
-        }
-
-        private void unloadCal()
-        {
-            this.Controls.Remove(this.calModeBtn);
-            this.Controls.Remove(this.justEquis);
-            this.Controls.Remove(this.Result);
-            this.Controls.Remove(this.SecondNumber);
-            this.Controls.Remove(this.FirstNumber);
-        }
-
+        //Добавить на форму объекты Секундомера
         private void loadTimer()
         {
             this.Controls.Add(this.watchBtnStop);
@@ -97,6 +80,27 @@ namespace OOP_Lab3_1
             this.Controls.Add(this.watchHours);
         }
 
+
+        //Удалить с формы объекты игры
+        private void unloadMouseGame()
+        {
+            this.Controls.Remove(this.Mouse);
+            this.Controls.Remove(this.winPicture);
+            this.Controls.Remove(this.gameRestart);
+            gameMouseTimer.Enabled = false;
+        }
+
+        //Удалить с формы объекты калькулятора
+        private void unloadCal()
+        {
+            this.Controls.Remove(this.calModeBtn);
+            this.Controls.Remove(this.justEquis);
+            this.Controls.Remove(this.Result);
+            this.Controls.Remove(this.SecondNumber);
+            this.Controls.Remove(this.FirstNumber);
+        }
+
+        //Удалить с формы объекты таймера
         private void unloadTimer()
         {
             this.Controls.Remove(this.watchBtnStop);
@@ -110,6 +114,16 @@ namespace OOP_Lab3_1
             this.Controls.Remove(this.watchHours);
         }
 
+        //Очистка формы от объектов всех режимов программы
+        private void unloadAll()
+        {
+            unloadCal();
+            unloadMouseGame();
+            unloadTimer();
+            this.Controls.Remove(this.CatBox);
+        }
+
+        //Логика вычислений калькулятора
         private void calResult()
         {
             if (FirstNumber.Text != "" && SecondNumber.Text != "")
@@ -121,11 +135,13 @@ namespace OOP_Lab3_1
             }
         }
 
+        //Меняется текст в текстовой форме - высчитывается результат 
         private void Number_TextChanged(object sender, EventArgs e)
         {
             calResult();
         }
 
+        //Переключение режимов калькулятора (Сложение / Вычитаение)
         private void calModeBtn_Click(object sender, EventArgs e)
         {
             if (calMode == 0)
@@ -141,12 +157,14 @@ namespace OOP_Lab3_1
             calResult();
         }
 
+        //Визуализация координат курсора мыши (на всякий)
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
             testXCoord.Text = e.X.ToString();
             testYCoord.Text = e.Y.ToString();
         }
 
+        //Логика секундомера
         private void Timer1_Tick(object sender, EventArgs e)
         {
             timerSeconds++.ToString();
@@ -157,16 +175,19 @@ namespace OOP_Lab3_1
                 watchHours.Text = (timerSeconds / 3600).ToString();
         }
 
+        //Запуск секундомера
         private void WatchBtnStart_Click(object sender, EventArgs e)
         {
             stopWatch.Enabled = true;
         }
 
+        //Пауза секундомера
         private void WatchBtnPause_Click(object sender, EventArgs e)
         {
             stopWatch.Enabled = false;
         }
 
+        //Остановка и сброс секундомера
         private void WatchBtnStop_Click(object sender, EventArgs e)
         {
             stopWatch.Enabled = false;
@@ -176,21 +197,25 @@ namespace OOP_Lab3_1
             timerSeconds = 0;
         }
 
+        //Таймер изменения состояния игры (2.5 тика в секунду)
         private void GameMouseTimer_Tick(object sender, EventArgs e)
         {
             int randomX = random.Next(0, Size.Width - 40);
             int randomY = random.Next(0, Size.Height - 40);
+            //Изменение положения мыши на рандомные координаты
             Mouse.Location = new System.Drawing.Point(randomX, randomY);
         }
 
+        //Логика клика по мыши (Победа в игре)
         private void Mouse_Click(object sender, EventArgs e)
         {
-            gameMouseTimer.Enabled = false;
-            this.Controls.Remove(this.Mouse);
-            this.Controls.Add(this.winPicture);
-            this.Controls.Add(this.gameRestart);
+            gameMouseTimer.Enabled = false; //Выключается таймер
+            this.Controls.Remove(this.Mouse); //Удаляется мышь
+            this.Controls.Add(this.winPicture); //Добавляется гифка салюта
+            this.Controls.Add(this.gameRestart); //Добавляется надпись о рестарте
         }
 
+        //Рестарт игры при клике на надпись о рестарте
         private void GameRestart_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             gameMouseTimer.Enabled = true;
