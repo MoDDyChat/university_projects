@@ -16,7 +16,7 @@ namespace OOP_Lab3_1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new App());
+            Application.Run(new Main());
         }
     }
 }

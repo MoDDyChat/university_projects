@@ -1,0 +1,1 @@
+Usual simple programs and laboratory work obtained during studies at the university.

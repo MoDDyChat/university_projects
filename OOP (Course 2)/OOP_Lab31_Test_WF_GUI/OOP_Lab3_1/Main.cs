@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace OOP_Lab3_1
 {
-    public partial class App : Form
+    public partial class Main : Form
     {
-        public App()
+        public Main()
         {
             InitializeComponent();
         }

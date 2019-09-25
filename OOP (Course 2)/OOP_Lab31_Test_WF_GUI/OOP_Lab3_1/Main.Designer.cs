@@ -1,6 +1,6 @@
 ﻿namespace OOP_Lab3_1
 {
-    partial class App
+    partial class Main
     {
         /// <summary>
         /// Обязательная переменная конструктора.
