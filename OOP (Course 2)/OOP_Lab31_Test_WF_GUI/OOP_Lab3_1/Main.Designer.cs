@@ -54,9 +54,21 @@
             this.Mouse = new System.Windows.Forms.PictureBox();
             this.CatBox = new System.Windows.Forms.PictureBox();
             this.gameRestart = new System.Windows.Forms.LinkLabel();
+            this.smallCal = new System.Windows.Forms.DateTimePicker();
+            this.calTypeCheck = new System.Windows.Forms.CheckBox();
+            this.bigCal = new System.Windows.Forms.MonthCalendar();
+            this.notify = new System.Windows.Forms.RichTextBox();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.registerBtn = new System.Windows.Forms.Button();
+            this.ageForm = new System.Windows.Forms.NumericUpDown();
+            this.ageLbl = new System.Windows.Forms.Label();
+            this.subCheckBox = new System.Windows.Forms.CheckedListBox();
+            this.nationCheckBtn = new System.Windows.Forms.RadioButton();
+            this.successBtn = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.winPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Mouse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CatBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ageForm)).BeginInit();
             this.SuspendLayout();
             // 
             // menuBox
@@ -68,11 +80,13 @@
             "Открыть картинку с котом",
             "Открыть калькулятор",
             "Открыть секундомер",
-            "Открыть игру \"Поймай мышь\""});
+            "Открыть игру \"Поймай мышь\"",
+            "Открыть планировщик",
+            "Открыть анкету"});
             this.menuBox.Location = new System.Drawing.Point(257, 58);
             this.menuBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.menuBox.Name = "menuBox";
-            this.menuBox.Size = new System.Drawing.Size(286, 28);
+            this.menuBox.Size = new System.Drawing.Size(286, 21);
             this.menuBox.TabIndex = 0;
             this.menuBox.TextChanged += new System.EventHandler(this.menuBox_TextChanged);
             // 
@@ -82,7 +96,7 @@
             this.menuLbl.Location = new System.Drawing.Point(384, 29);
             this.menuLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.menuLbl.Name = "menuLbl";
-            this.menuLbl.Size = new System.Drawing.Size(52, 20);
+            this.menuLbl.Size = new System.Drawing.Size(36, 13);
             this.menuLbl.TabIndex = 1;
             this.menuLbl.Text = "Меню";
             // 
@@ -92,7 +106,7 @@
             this.testLbl.Location = new System.Drawing.Point(712, 29);
             this.testLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.testLbl.Name = "testLbl";
-            this.testLbl.Size = new System.Drawing.Size(18, 20);
+            this.testLbl.Size = new System.Drawing.Size(13, 13);
             this.testLbl.TabIndex = 2;
             this.testLbl.Text = "0";
             // 
@@ -101,7 +115,7 @@
             this.FirstNumber.Location = new System.Drawing.Point(128, 223);
             this.FirstNumber.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.FirstNumber.Name = "FirstNumber";
-            this.FirstNumber.Size = new System.Drawing.Size(148, 26);
+            this.FirstNumber.Size = new System.Drawing.Size(148, 20);
             this.FirstNumber.TabIndex = 3;
             this.FirstNumber.TextChanged += new System.EventHandler(this.Number_TextChanged);
             // 
@@ -110,7 +124,7 @@
             this.SecondNumber.Location = new System.Drawing.Point(326, 223);
             this.SecondNumber.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.SecondNumber.Name = "SecondNumber";
-            this.SecondNumber.Size = new System.Drawing.Size(148, 26);
+            this.SecondNumber.Size = new System.Drawing.Size(148, 20);
             this.SecondNumber.TabIndex = 4;
             this.SecondNumber.TextChanged += new System.EventHandler(this.Number_TextChanged);
             // 
@@ -120,7 +134,7 @@
             this.Result.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Result.Name = "Result";
             this.Result.ReadOnly = true;
-            this.Result.Size = new System.Drawing.Size(148, 26);
+            this.Result.Size = new System.Drawing.Size(148, 20);
             this.Result.TabIndex = 5;
             // 
             // justEquis
@@ -151,7 +165,7 @@
             this.testXCoord.AutoSize = true;
             this.testXCoord.Location = new System.Drawing.Point(22, 28);
             this.testXCoord.Name = "testXCoord";
-            this.testXCoord.Size = new System.Drawing.Size(18, 20);
+            this.testXCoord.Size = new System.Drawing.Size(13, 13);
             this.testXCoord.TabIndex = 3;
             this.testXCoord.Text = "0";
             // 
@@ -160,7 +174,7 @@
             this.testYCoord.AutoSize = true;
             this.testYCoord.Location = new System.Drawing.Point(22, 48);
             this.testYCoord.Name = "testYCoord";
-            this.testYCoord.Size = new System.Drawing.Size(18, 20);
+            this.testYCoord.Size = new System.Drawing.Size(13, 13);
             this.testYCoord.TabIndex = 4;
             this.testYCoord.Text = "0";
             // 
@@ -174,7 +188,7 @@
             this.watchHours.Location = new System.Drawing.Point(206, 190);
             this.watchHours.Name = "watchHours";
             this.watchHours.ReadOnly = true;
-            this.watchHours.Size = new System.Drawing.Size(100, 26);
+            this.watchHours.Size = new System.Drawing.Size(100, 20);
             this.watchHours.TabIndex = 5;
             this.watchHours.Text = "0";
             // 
@@ -183,7 +197,7 @@
             this.watchMinutes.Location = new System.Drawing.Point(358, 190);
             this.watchMinutes.Name = "watchMinutes";
             this.watchMinutes.ReadOnly = true;
-            this.watchMinutes.Size = new System.Drawing.Size(100, 26);
+            this.watchMinutes.Size = new System.Drawing.Size(100, 20);
             this.watchMinutes.TabIndex = 6;
             this.watchMinutes.Text = "0";
             // 
@@ -192,7 +206,7 @@
             this.watchSeconds.Location = new System.Drawing.Point(507, 188);
             this.watchSeconds.Name = "watchSeconds";
             this.watchSeconds.ReadOnly = true;
-            this.watchSeconds.Size = new System.Drawing.Size(100, 26);
+            this.watchSeconds.Size = new System.Drawing.Size(100, 20);
             this.watchSeconds.TabIndex = 7;
             this.watchSeconds.Text = "0";
             // 
@@ -306,7 +320,131 @@
             this.gameRestart.Text = "Поздравляем! Вы поймали мышь! Попробовать ещё раз?";
             this.gameRestart.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GameRestart_LinkClicked);
             // 
-            // App
+            // smallCal
+            // 
+            this.smallCal.Location = new System.Drawing.Point(206, 114);
+            this.smallCal.Name = "smallCal";
+            this.smallCal.Size = new System.Drawing.Size(200, 20);
+            this.smallCal.TabIndex = 5;
+            this.smallCal.ValueChanged += new System.EventHandler(this.SmallCal_ValueChanged);
+            // 
+            // calTypeCheck
+            // 
+            this.calTypeCheck.AutoSize = true;
+            this.calTypeCheck.Location = new System.Drawing.Point(418, 114);
+            this.calTypeCheck.Name = "calTypeCheck";
+            this.calTypeCheck.Size = new System.Drawing.Size(154, 17);
+            this.calTypeCheck.TabIndex = 6;
+            this.calTypeCheck.Text = "Расширенный календарь";
+            this.calTypeCheck.UseVisualStyleBackColor = true;
+            this.calTypeCheck.CheckedChanged += new System.EventHandler(this.calTypeCheck_CheckedChanged);
+            // 
+            // bigCal
+            // 
+            this.bigCal.Location = new System.Drawing.Point(242, 113);
+            this.bigCal.Name = "bigCal";
+            this.bigCal.SelectionRange = new System.Windows.Forms.SelectionRange(new System.DateTime(2019, 10, 2, 0, 0, 0, 0), new System.DateTime(2019, 10, 8, 0, 0, 0, 0));
+            this.bigCal.TabIndex = 7;
+            this.bigCal.Visible = false;
+            this.bigCal.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.BigCal_DateChanged);
+            // 
+            // notify
+            // 
+            this.notify.Location = new System.Drawing.Point(418, 137);
+            this.notify.Name = "notify";
+            this.notify.Size = new System.Drawing.Size(164, 138);
+            this.notify.TabIndex = 8;
+            this.notify.Text = "";
+            // 
+            // progressBar
+            // 
+            this.progressBar.Enabled = false;
+            this.progressBar.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.progressBar.Location = new System.Drawing.Point(257, 192);
+            this.progressBar.Maximum = 5;
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(286, 23);
+            this.progressBar.Step = 1;
+            this.progressBar.TabIndex = 5;
+            // 
+            // registerBtn
+            // 
+            this.registerBtn.Enabled = false;
+            this.registerBtn.Location = new System.Drawing.Point(549, 192);
+            this.registerBtn.Name = "registerBtn";
+            this.registerBtn.Size = new System.Drawing.Size(75, 23);
+            this.registerBtn.TabIndex = 7;
+            this.registerBtn.Text = "Отправить";
+            this.registerBtn.UseVisualStyleBackColor = true;
+            this.registerBtn.Click += new System.EventHandler(this.RegisterBtn_Click);
+            // 
+            // ageForm
+            // 
+            this.ageForm.Location = new System.Drawing.Point(261, 107);
+            this.ageForm.Minimum = new decimal(new int[] {
+            18,
+            0,
+            0,
+            0});
+            this.ageForm.Name = "ageForm";
+            this.ageForm.Size = new System.Drawing.Size(120, 20);
+            this.ageForm.TabIndex = 9;
+            this.ageForm.Value = new decimal(new int[] {
+            18,
+            0,
+            0,
+            0});
+            this.ageForm.ValueChanged += new System.EventHandler(this.AgeForm_ValueChanged);
+            // 
+            // ageLbl
+            // 
+            this.ageLbl.AutoSize = true;
+            this.ageLbl.Location = new System.Drawing.Point(258, 91);
+            this.ageLbl.Name = "ageLbl";
+            this.ageLbl.Size = new System.Drawing.Size(123, 13);
+            this.ageLbl.TabIndex = 10;
+            this.ageLbl.Text = "Укажите Ваш возраст:";
+            // 
+            // subCheckBox
+            // 
+            this.subCheckBox.AllowDrop = true;
+            this.subCheckBox.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.subCheckBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.subCheckBox.CheckOnClick = true;
+            this.subCheckBox.FormattingEnabled = true;
+            this.subCheckBox.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.subCheckBox.Items.AddRange(new object[] {
+            "Разрешить обработку данных",
+            "Подписаться на нашу рассылку",
+            "Оформить платную подписку"});
+            this.subCheckBox.Location = new System.Drawing.Point(261, 135);
+            this.subCheckBox.Name = "subCheckBox";
+            this.subCheckBox.Size = new System.Drawing.Size(197, 45);
+            this.subCheckBox.TabIndex = 11;
+            this.subCheckBox.ThreeDCheckBoxes = true;
+            this.subCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.SubCheckBox_ItemCheck);
+            // 
+            // nationCheckBtn
+            // 
+            this.nationCheckBtn.AutoSize = true;
+            this.nationCheckBtn.Location = new System.Drawing.Point(398, 107);
+            this.nationCheckBtn.Name = "nationCheckBtn";
+            this.nationCheckBtn.Size = new System.Drawing.Size(131, 17);
+            this.nationCheckBtn.TabIndex = 6;
+            this.nationCheckBtn.Text = "Я гражданин России";
+            this.nationCheckBtn.UseVisualStyleBackColor = true;
+            this.nationCheckBtn.CheckedChanged += new System.EventHandler(this.TrueAgeBtn_CheckedChanged);
+            // 
+            // successBtn
+            // 
+            this.successBtn.AutoSize = true;
+            this.successBtn.Location = new System.Drawing.Point(316, 228);
+            this.successBtn.Name = "successBtn";
+            this.successBtn.Size = new System.Drawing.Size(184, 13);
+            this.successBtn.TabIndex = 12;
+            this.successBtn.Text = "Ваша заявка успешна отправлена!";
+            // 
+            // Main
             // 
             this.ClientSize = new System.Drawing.Size(800, 449);
             this.Controls.Add(this.testYCoord);
@@ -314,12 +452,13 @@
             this.Controls.Add(this.testLbl);
             this.Controls.Add(this.menuLbl);
             this.Controls.Add(this.menuBox);
-            this.Name = "App";
+            this.Name = "Main";
             this.Text = "Form1";
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.winPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Mouse)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CatBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ageForm)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -352,6 +491,17 @@
         private System.Windows.Forms.Timer gameMouseTimer;
         private System.Windows.Forms.PictureBox winPicture;
         private System.Windows.Forms.LinkLabel gameRestart;
+        private System.Windows.Forms.DateTimePicker smallCal;
+        private System.Windows.Forms.CheckBox calTypeCheck;
+        private System.Windows.Forms.MonthCalendar bigCal;
+        private System.Windows.Forms.RichTextBox notify;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Button registerBtn;
+        private System.Windows.Forms.NumericUpDown ageForm;
+        private System.Windows.Forms.Label ageLbl;
+        private System.Windows.Forms.CheckedListBox subCheckBox;
+        private System.Windows.Forms.RadioButton nationCheckBtn;
+        private System.Windows.Forms.Label successBtn;
     }
 }
 

@@ -21,7 +21,13 @@ namespace OOP_Lab3_1
         int calMode = 0;
 
         //Счётчик таймера
-        int timerSeconds = 0; 
+        int timerSeconds = 0;
+
+        //Триггер паузы секундомера
+        bool isPause = false;
+
+        //Триггер для формы возраста
+        bool ageTrigger = false;
 
         Random random = new Random();
 
@@ -45,6 +51,14 @@ namespace OOP_Lab3_1
                 case "Открыть игру \"Поймай мышь\"":
                     unloadAll();
                     loadMouseGame();
+                    break;
+                case "Открыть планировщик":
+                    unloadAll();
+                    loadPlanner();
+                    break;
+                case "Открыть анкету":
+                    unloadAll();
+                    loadReg();
                     break;
             } 
         }
@@ -78,6 +92,46 @@ namespace OOP_Lab3_1
             this.Controls.Add(this.watchSeconds);
             this.Controls.Add(this.watchMinutes);
             this.Controls.Add(this.watchHours);
+        }
+
+        //Добавить на форму объекты Планировщика
+        private void loadPlanner()
+        {
+            this.Controls.Add(this.notify);
+            this.Controls.Add(this.bigCal);
+            this.Controls.Add(this.calTypeCheck);
+            this.Controls.Add(this.smallCal);
+        }
+
+        //Добавить на форму объекты Анкеты
+        private void loadReg()
+        {
+            this.Controls.Add(this.subCheckBox);
+            this.Controls.Add(this.ageLbl);
+            this.Controls.Add(this.ageForm);
+            this.Controls.Add(this.registerBtn);
+            this.Controls.Add(this.nationCheckBtn);
+            this.Controls.Add(this.progressBar);
+        }
+
+        //Удалить с формы объекты анкеты
+        private void unloadReg()
+        {
+            this.Controls.Remove(this.subCheckBox);
+            this.Controls.Remove(this.ageLbl);
+            this.Controls.Remove(this.ageForm);
+            this.Controls.Remove(this.registerBtn);
+            this.Controls.Remove(this.nationCheckBtn);
+            this.Controls.Remove(this.progressBar);
+        }
+
+        //Удалить с формы объекты Планировщика
+        private void unloadPlanner()
+        {
+            this.Controls.Remove(this.notify);
+            this.Controls.Remove(this.bigCal);
+            this.Controls.Remove(this.calTypeCheck);
+            this.Controls.Remove(this.smallCal);
         }
 
 
@@ -120,6 +174,8 @@ namespace OOP_Lab3_1
             unloadCal();
             unloadMouseGame();
             unloadTimer();
+            unloadPlanner();
+            unloadReg();
             this.Controls.Remove(this.CatBox);
         }
 
@@ -184,7 +240,16 @@ namespace OOP_Lab3_1
         //Пауза секундомера
         private void WatchBtnPause_Click(object sender, EventArgs e)
         {
-            stopWatch.Enabled = false;
+            if (isPause == false)
+            {
+                stopWatch.Enabled = false;
+                isPause = true;
+            }
+            else
+            {
+                stopWatch.Enabled = true;
+                isPause = false;
+            }
         }
 
         //Остановка и сброс секундомера
@@ -200,8 +265,8 @@ namespace OOP_Lab3_1
         //Таймер изменения состояния игры (2.5 тика в секунду)
         private void GameMouseTimer_Tick(object sender, EventArgs e)
         {
-            int randomX = random.Next(0, Size.Width - 40);
-            int randomY = random.Next(0, Size.Height - 40);
+            int randomX = random.Next(0, Size.Width - 80);
+            int randomY = random.Next(0, Size.Height - 80);
             //Изменение положения мыши на рандомные координаты
             Mouse.Location = new System.Drawing.Point(randomX, randomY);
         }
@@ -222,6 +287,82 @@ namespace OOP_Lab3_1
             this.Controls.Add(this.Mouse);
             this.Controls.Remove(this.winPicture);
             this.Controls.Remove(this.gameRestart);
+        }
+
+        //Переключение между типами календаря
+        private void calTypeCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (calTypeCheck.Checked == true)
+            {
+                bigCal.Visible = true;
+                smallCal.Visible = false;
+            }
+            else
+            {
+                bigCal.Visible = false;
+                smallCal.Visible = true;
+            }
+        }
+
+        //Логика 'Большого' календаря
+        private void BigCal_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            notify.Text = "Вы выбрали: " + e.Start.ToString() + "\n\n";
+            if (e.Start.ToString() == "08.10.2019 0:00:00")
+            {
+                notify.Text = notify.Text + "В этот день нужно сдать лабу по ООП";
+            }
+            else
+                notify.Text = notify.Text + "В этот день ничего сдавать не нужно";
+        }
+
+        //Логика 'маленького' календаря
+        private void SmallCal_ValueChanged(object sender, EventArgs e)
+        {
+            notify.Text = "Вы выбрали: " + smallCal.Text.ToString() + "\n\n";
+            if (smallCal.Text.ToString() == "8 октября 2019 г.")
+            {
+                notify.Text = notify.Text + "В этот день нужно сдать лабу по ООП";
+            }
+            else
+                notify.Text = notify.Text + "В этот день ничего сдавать не нужно";
+        }
+
+        //Логика бокса выбора возраста
+        private void AgeForm_ValueChanged(object sender, EventArgs e)
+        {
+            if (ageTrigger == false)
+                progressBar.Value++;
+            ageTrigger = true;
+            if (progressBar.Value == 5) registerBtn.Enabled = true;
+            else registerBtn.Enabled = false;
+        }
+
+        //Проверка гражданства РФ (да-да)
+        private void TrueAgeBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            progressBar.Value++;
+            if (progressBar.Value == 5) registerBtn.Enabled = true;
+            else registerBtn.Enabled = false;
+        }
+
+        //Проверка на подтверждение подписок
+        private void SubCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.NewValue.ToString() == "Checked") progressBar.Value++;
+            else progressBar.Value--;
+            if (progressBar.Value == 5) registerBtn.Enabled = true;
+            else registerBtn.Enabled = false;
+        }
+
+        //Логика кнопки 'Отправить'
+        private void RegisterBtn_Click(object sender, EventArgs e)
+        {
+            registerBtn.Enabled = false;
+            this.Controls.Add(this.successBtn);
+            progressBar.Enabled = false;
+            subCheckBox.Enabled = false;
+            ageForm.Enabled = false;
         }
     }
 }
