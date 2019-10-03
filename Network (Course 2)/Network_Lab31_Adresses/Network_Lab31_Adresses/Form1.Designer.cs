@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.FirstIPtxt = new System.Windows.Forms.Label();
             this.StartBtn = new System.Windows.Forms.Button();
             this.SecondIPtxt = new System.Windows.Forms.Label();
@@ -47,8 +46,6 @@
             this.BroadcastIPTxt = new System.Windows.Forms.Label();
             this.MACAddressTxt = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.progressTxt = new System.Windows.Forms.Label();
-            this.updateProgressTxt = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // FirstIPtxt
@@ -234,27 +231,11 @@
             this.progressBar.Step = 1;
             this.progressBar.TabIndex = 19;
             // 
-            // progressTxt
-            // 
-            this.progressTxt.AutoSize = true;
-            this.progressTxt.Location = new System.Drawing.Point(589, 44);
-            this.progressTxt.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.progressTxt.Name = "progressTxt";
-            this.progressTxt.Size = new System.Drawing.Size(127, 13);
-            this.progressTxt.TabIndex = 20;
-            this.progressTxt.Text = "0/0 addresses completed";
-            // 
-            // updateProgressTxt
-            // 
-            this.updateProgressTxt.Enabled = true;
-            this.updateProgressTxt.Interval = 10;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(805, 367);
-            this.Controls.Add(this.progressTxt);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.MACAddressTxt);
             this.Controls.Add(this.BroadcastIPTxt);
@@ -300,8 +281,6 @@
         private System.Windows.Forms.Label BroadcastIPTxt;
         private System.Windows.Forms.Label MACAddressTxt;
         private System.Windows.Forms.ProgressBar progressBar;
-        private System.Windows.Forms.Label progressTxt;
-        private System.Windows.Forms.Timer updateProgressTxt;
     }
 }
 
