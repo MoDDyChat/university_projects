@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Network_Lab31_Adresses", "Network_Lab31_Adresses\Network_Lab31_Adresses.csproj", "{52436D7F-B1E4-42C7-B093-F08D5C5CAA73}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52436D7F-B1E4-42C7-B093-F08D5C5CAA73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52436D7F-B1E4-42C7-B093-F08D5C5CAA73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52436D7F-B1E4-42C7-B093-F08D5C5CAA73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52436D7F-B1E4-42C7-B093-F08D5C5CAA73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {22C6AD6B-AF94-4598-97BD-638D1CB67E03}
+	EndGlobalSection
+EndGlobal
