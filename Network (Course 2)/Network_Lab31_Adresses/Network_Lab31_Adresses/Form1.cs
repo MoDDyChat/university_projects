@@ -23,9 +23,11 @@ namespace Network_Lab31_Adresses
             IPAddress localIP = getLocalIP();
             IPAddress subnetMask = getSubnetMask(localIP);
             IPAddress broadcastIP = getBroadCastIP(localIP, subnetMask);
+            IPAddress subnetIP = getSubnetIP(localIP, subnetMask);
             string MACAddressStr = getMACAddress();
 
-            SubnetIP.Text = localIP.ToString();
+            LocalIP.Text = localIP.ToString();
+            SubnetIP.Text = subnetIP.ToString();
             SubnetMask.Text = subnetMask.ToString();
             BroadcastIP.Text = broadcastIP.ToString();
             MACAddress.Text = MACAddressStr;
@@ -76,6 +78,18 @@ namespace Network_Lab31_Adresses
             return MACAddress;
         }
 
+        private IPAddress getSubnetIP(IPAddress localIP, IPAddress mask)
+        {
+            byte[] subnetIPBytes = new byte[4];
+            byte[] ipBytes = localIP.GetAddressBytes();
+            byte[] maskBytes = mask.GetAddressBytes();
+            for (int i = 0; i < 4; i++)
+            {
+                subnetIPBytes[i] = (byte)(ipBytes[i] & (byte)maskBytes[i]);
+            }
+            return new IPAddress(subnetIPBytes);
+        }
+
         private IPAddress getBroadCastIP(IPAddress localIP, IPAddress mask)
         {
             byte[] broadcastIPBytes = new byte[4];
@@ -89,7 +103,7 @@ namespace Network_Lab31_Adresses
         }
 
         string startIP = "193.233.146.242";
-        string lastIP = "193.233.146.248";
+        string lastIP = "193.233.146.245";
 
         private void FirstIP_TextChanged(object sender, EventArgs e)
         {
