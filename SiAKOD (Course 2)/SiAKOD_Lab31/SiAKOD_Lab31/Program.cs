@@ -4,7 +4,7 @@ namespace SiAKOD_Lab31
 {
     class Program
     {
-        int numsAmount = 49; //Количество рандомных трёхзначных числе на входе
+        int numsAmount = 49; //Количество рандомных трёхзначных чисел на входе
         int tableSize = 73; //Размер хэш-таблицы
 
         int[] nums = new int[49];
@@ -27,7 +27,7 @@ namespace SiAKOD_Lab31
                     {
                         i--;
                         break;
-                }
+                    }
             }
         }
 
@@ -47,7 +47,7 @@ namespace SiAKOD_Lab31
             Console.WriteLine(numsOut);
         }
 
-        //Заполнение хеш-таблицы числами из массива nums, используя открытую адресацию с квадратичным  опробыванием.
+        //Заполнение хеш-таблицы числами из массива nums, используя открытую адресацию с квадратичным опробованием.
         public void hashTable()
         {
             for (int i = 0; i < numsAmount; i++)
@@ -62,7 +62,7 @@ namespace SiAKOD_Lab31
                     table[current] = nums[i];
                 }
 
-                //Иначе используем открытую адресацию с квадратичным  опробыванием
+                //Иначе используем открытую адресацию с квадратичным опробованием
                 else
                 {
                     int j = 1;
