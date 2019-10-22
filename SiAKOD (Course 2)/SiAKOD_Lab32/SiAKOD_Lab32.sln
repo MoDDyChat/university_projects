@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiAKOD_Lab32", "SiAKOD_Lab32\SiAKOD_Lab32.csproj", "{16A8BB91-B118-4FD0-A491-5678190C16C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16A8BB91-B118-4FD0-A491-5678190C16C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16A8BB91-B118-4FD0-A491-5678190C16C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16A8BB91-B118-4FD0-A491-5678190C16C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16A8BB91-B118-4FD0-A491-5678190C16C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {98A03313-1919-4D8D-B0D7-F400E330AC33}
+	EndGlobalSection
+EndGlobal
