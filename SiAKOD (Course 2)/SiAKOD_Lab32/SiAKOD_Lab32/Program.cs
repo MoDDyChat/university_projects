@@ -151,7 +151,11 @@ namespace SiAKOD_Lab32
                 try
                 {
                     while (table[(current + j * j) % tableSize] != searchNum)
+                    {
+                        if (table[(current + j * j) % tableSize] == 0)
+                            return -1;
                         j++;
+                    }
                     return (current + j * j) % tableSize;
                 }
                 catch
@@ -262,7 +266,7 @@ namespace SiAKOD_Lab32
 
 
             //Если ячейка пустая, кладём в неё значение ключа
-            if (table[current] == 0)
+            if (table[current] == 0 || table[current] == -1)
             {
                 table[current] = addNum;
                 return current;
@@ -274,7 +278,7 @@ namespace SiAKOD_Lab32
                 int j = 1;
                 try
                 {
-                    while (table[(current + j * j) % tableSize] != 0)
+                    while (table[(current + j * j) % tableSize] != 0 && table[(current + j * j) % tableSize] != -1)
                         j++;
                     table[(current + j * j) % tableSize] = addNum;
                     return (current + j * j) % tableSize;
@@ -309,7 +313,7 @@ namespace SiAKOD_Lab32
                         else
                         {
                             int deleteIndex = search(deleteNum);
-                            table[deleteIndex] = 0;
+                            table[deleteIndex] = -1;
                             updateScreen();
                             Console.WriteLine(String.Format("Число {0} успешно удалено из таблицы по индексу {1}", deleteNum, deleteIndex));
                             Console.ReadKey();
@@ -367,7 +371,7 @@ namespace SiAKOD_Lab32
                     if (replaceIndex != -1) {
                         if (search(secondNum) == -1)
                         {
-                            table[replaceIndex] = 0;
+                            table[replaceIndex] = -1;
                             int newIndex = addNums(secondNum);
                             updateScreen();
                             Console.WriteLine(String.Format("Число {0} [{1}] успешно заменено на число {2} [{3}] в таблице!", firstNum, replaceIndex, secondNum, newIndex));
@@ -474,7 +478,7 @@ namespace SiAKOD_Lab32
                 else
                 {
                     int j = 1;
-                    while (table[(current + j * j) % tableSize] != 0)
+                    while (table[(current + j * j) % tableSize] != 0 && table[(current + j * j) % tableSize] != -1)
                         j++;
                     table[(current + j * j) % tableSize] = nums[i];
                     b += j; //Считаем количество проб, необходимых для размещения ключа в таблице
