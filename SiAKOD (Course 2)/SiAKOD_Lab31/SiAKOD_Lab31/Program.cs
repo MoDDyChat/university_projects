@@ -6,7 +6,7 @@ namespace SiAKOD_Lab31
     {
         int numsAmount = 49; //Количество рандомных трёхзначных чисел на входе
         int tableSize = 73; //Размер хэш-таблицы
-
+        
         int[] nums = new int[49];
         int[] table = new int[73];
 
@@ -23,11 +23,14 @@ namespace SiAKOD_Lab31
             {
                 nums[i] = rand.Next(100, 999);
                 for (int j = 0; j < i; j++)
+                {
                     if (nums[i] == nums[j])
                     {
                         i--;
                         break;
                     }
+                    Console.WriteLine(i);
+                }
             }
         }
 
@@ -59,6 +62,7 @@ namespace SiAKOD_Lab31
                 //Если ячейка пустая, кладём в неё значение ключа
                 if (table[current] == 0)
                 {
+                    b += 1;
                     table[current] = nums[i];
                 }
 
@@ -80,10 +84,10 @@ namespace SiAKOD_Lab31
             tableOut.Append("Полученная хеш-таблица: \n");
             for (int i = 0; i < tableSize; i++)
             {
-                if (i < 9)
-                    tableOut.Append(String.Format("{0}:  {1,-10}", i + 1, table[i]));
+                if (i < 10)
+                    tableOut.Append(String.Format("{0}:  {1,-10}", i, table[i]));
                 else
-                    tableOut.Append(String.Format("{0}: {1,-10}", i + 1, table[i]));
+                    tableOut.Append(String.Format("{0}: {1,-10}", i, table[i]));
                 if ((i + 1) % 7 == 0)
                     tableOut.Append("\n");
             }

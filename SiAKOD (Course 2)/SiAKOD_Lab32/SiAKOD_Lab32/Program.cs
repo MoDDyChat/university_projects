@@ -11,6 +11,7 @@ namespace SiAKOD_Lab32
 
         static int numsCount;
         static int tableSize;
+        static double b;
 
         static System.Text.StringBuilder numsOut = new System.Text.StringBuilder();
         static System.Text.StringBuilder tableOut = new System.Text.StringBuilder();
@@ -62,10 +63,10 @@ namespace SiAKOD_Lab32
                         inputNums();
                         break;
                     case 2:
-                        search();
+                        searchGUI();
                         break;
                     case 3:
-                        addNums();
+                        addNumsGUI();
                         break;
                     case 4:
                         deleteNums(); 
@@ -137,35 +138,71 @@ namespace SiAKOD_Lab32
             } while (newNum != "");
         }
 
-        static void search()
+        static int search(int searchNum)
         {
-            updateScreen();
-            Console.Write("Введите число, которое вы хотите найти в таблице: ");
-            int searchNum;
+            int current = 0;
+            current = searchNum % tableSize;
+
+            if (table[current] == searchNum)
+                return current;
+            else
+            {
+                int j = 1;
+                try
+                {
+                    while (table[(current + j * j) % tableSize] != searchNum)
+                        j++;
+                    return (current + j * j) % tableSize;
+                }
+                catch
+                {
+                    return -1;
+                }
+            }
+        }
+
+        static void searchGUI()
+        {
             do
             {
+                updateScreen();
+                Console.Write("Введите число, которое вы хотите найти в таблице: ");
+                int searchNum;
                 try
                 {
                     searchNum = Int32.Parse(Console.ReadLine());
+                    if ((searchNum / 100 < 10) && (searchNum / 100 >= 1)) {
+                        int searchIndex = search(searchNum);
+                        if (searchIndex != -1)
+                        {
+                            updateScreen();
+                            Console.WriteLine(String.Format("Число {0} найдено в таблице под индексом {1} \n",searchNum, searchIndex));
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            updateScreen();
+                            Console.WriteLine(String.Format("Число {0} отсутствует в таблице! \n", searchNum));
+                            Console.ReadKey();
+                        }
+                    }
+                    else
+                    {
+                        updateScreen();
+                        Console.WriteLine(String.Format("Число {0} не подходит. Введите трёхзначное число, которого ещё нет в списке \n", searchNum));
+                        Console.ReadKey();
+                    }
                     break;
                 }
                 catch
                 {
                     Console.WriteLine("Введите корректное число! \n");
+                    Console.ReadKey();
                 }
             } while (true);
-
-            updateScreen();
-            if (searchNum == 0)
-                Console.WriteLine("Число 0 является признаком пустой ячейки в таблице и не может быть использовано для поиска!");
-            else if (table.IndexOf(searchNum) != -1)
-                Console.WriteLine(String.Format("Число {0} найдено в таблице под индексом {1}.", searchNum, table.IndexOf(searchNum)));
-            else
-                Console.WriteLine(String.Format("Число {0} не было найдено в таблице.", searchNum));
-            Console.ReadKey();
         }
 
-        static void addNums()
+        static void addNumsGUI()
         {
             updateScreen();
             int addNum;
@@ -177,7 +214,7 @@ namespace SiAKOD_Lab32
                     addNum = Int32.Parse(Console.ReadLine());
                     if ((addNum / 100 < 10) && (addNum / 100 >= 1))
                     {
-                        if (!table.Contains(addNum))
+                        if (search(addNum) == -1)
                             break;
                         else
                         {
@@ -205,32 +242,48 @@ namespace SiAKOD_Lab32
                     updateScreen();
                 }
             } while (true);
-            int addIndex = 0;
-            int current = 0;
-            current = addNum % tableSize;
+
+            int addIndex = addNums(addNum);
+
+            if (addIndex == -1)
+            {
+                Console.WriteLine(String.Format("Число {0} невозможно добавить в таблицу", addNum));
+                return;
+            }
+
+            updateScreen();
+            Console.WriteLine(String.Format("Число {0} было добавлено в таблицу под индексом {1}", addNum, addIndex));
+            Console.ReadKey();
+        }
+
+        static int addNums(int addNum)
+        {
+            int current = addNum % tableSize;
+
 
             //Если ячейка пустая, кладём в неё значение ключа
             if (table[current] == 0)
             {
-                //b += 1;
                 table[current] = addNum;
-                addIndex = current;
+                return current;
             }
 
             //Иначе используем открытую адресацию с квадратичным опробованием
             else
             {
                 int j = 1;
-                while (table[(current + j * j) % tableSize] != 0)
-                    j++;
-                table[(current + j * j) % tableSize] = addNum;
-                addIndex = (current + j * j) % tableSize;
-                //b += j; //Считаем количество проб, необходимых для размещения ключа в таблице
+                try
+                {
+                    while (table[(current + j * j) % tableSize] != 0)
+                        j++;
+                    table[(current + j * j) % tableSize] = addNum;
+                    return (current + j * j) % tableSize;
+                }
+                catch
+                {
+                    return -1;
+                }
             }
-
-            updateScreen();
-            Console.WriteLine(String.Format("Число {0} было добавлено в таблицу под индексом {1}", addNum, addIndex));
-            Console.ReadKey();
         }
 
         static void deleteNums()
@@ -245,7 +298,7 @@ namespace SiAKOD_Lab32
                     deleteNum = Int32.Parse(Console.ReadLine());
                     if ((deleteNum / 100 < 10) && (deleteNum / 100 >= 1))
                     {
-                        if (!table.Contains(deleteNum))
+                        if (search(deleteNum) == -1)
                         {
                             updateScreen();
                             Console.WriteLine(String.Format("Число {0} отсутствует в таблице", deleteNum));
@@ -255,7 +308,7 @@ namespace SiAKOD_Lab32
                         }
                         else
                         {
-                            int deleteIndex = table.IndexOf(deleteNum);
+                            int deleteIndex = search(deleteNum);
                             table[deleteIndex] = 0;
                             updateScreen();
                             Console.WriteLine(String.Format("Число {0} успешно удалено из таблицы по индексу {1}", deleteNum, deleteIndex));
@@ -310,14 +363,14 @@ namespace SiAKOD_Lab32
 
                 if ((firstNum / 100 < 10) && (firstNum / 100 >= 1) && (secondNum / 100 < 10) && (secondNum / 100 >= 1))
                 {
-                    if (table.Contains(firstNum)) {
-                        if (!table.Contains(secondNum))
+                    int replaceIndex = search(firstNum);
+                    if (replaceIndex != -1) {
+                        if (search(secondNum) == -1)
                         {
-                            int replaceIndex = table.IndexOf(firstNum);
-                            table[replaceIndex] = secondNum;
-
+                            table[replaceIndex] = 0;
+                            int newIndex = addNums(secondNum);
                             updateScreen();
-                            Console.WriteLine(String.Format("Число {0} успешно заменено на число {1} в таблице по индексу {2}", firstNum, secondNum, replaceIndex));
+                            Console.WriteLine(String.Format("Число {0} [{1}] успешно заменено на число {2} [{3}] в таблице!", firstNum, replaceIndex, secondNum, newIndex));
                             Console.ReadKey();
                             break;
                         }
@@ -368,7 +421,7 @@ namespace SiAKOD_Lab32
             }
         }
 
-        static public void displayNums()
+        static void displayNums()
         {
             numsOut.Clear();
             numsOut.Append("Рандомно сгенирированные трёхзначные числа: \n");
@@ -413,7 +466,7 @@ namespace SiAKOD_Lab32
                 //Если ячейка пустая, кладём в неё значение ключа
                 if (table[current] == 0)
                 {
-                    //b += 1;
+                    b += 1;
                     table[current] = nums[i];
                 }
 
@@ -424,13 +477,14 @@ namespace SiAKOD_Lab32
                     while (table[(current + j * j) % tableSize] != 0)
                         j++;
                     table[(current + j * j) % tableSize] = nums[i];
-                    //b += j; //Считаем количество проб, необходимых для размещения ключа в таблице
+                    b += j; //Считаем количество проб, необходимых для размещения ключа в таблице
                 }
             }
         }
 
-        static public void displayTable()
+        static void displayTable()
         {
+            int alpha = 0;
             tableOut.Clear();
             tableOut.Append("Полученная хеш-таблица: \n");
             for (int i = 0; i < tableSize; i++)
@@ -443,13 +497,19 @@ namespace SiAKOD_Lab32
                     tableOut.Append(String.Format("{0}: {1,-10}", i, table[i]));
                 if ((i + 1) % 8 == 0)
                     tableOut.Append("\n");
+                if (table[i] != 0)
+                    alpha++;
             }
             Console.WriteLine(tableOut);
+            Console.WriteLine(String.Format("\nКоэффициент заполнения таблицы: {0}", (alpha * 1f / tableSize * 1f).ToString("0.00")));
+            Console.WriteLine(String.Format("Среднее количество шагов, необходимых для размещения ключа в таблице: {0}", (b / numsCount).ToString("0.00")));
             Console.WriteLine("\n--------------------------------------------------------");
         }
 
         static void Main(string[] args)
         {
+            Console.SetWindowSize(115, 30);
+
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Clear();
