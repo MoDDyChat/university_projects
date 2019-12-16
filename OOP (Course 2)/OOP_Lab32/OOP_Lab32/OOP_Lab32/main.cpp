@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include "conio.h"
 
 using namespace std;
@@ -10,40 +10,40 @@ protected:
 public:
 	string company;
 
-	//Конструктор без параметров
+	//РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р±РµР· РїР°СЂР°РјРµС‚СЂРѕРІ
 	Processor() {
 		speed = 0.0;
 		isBoost = false;
 		company = "intel";
-		printf("Вызван конструктор Processor() \n");
+		printf("Р’С‹Р·РІР°РЅ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Processor() \n");
 	}
 
-	//Конструктор с параметрами
+	//РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё
 	Processor(double speed, bool isBoost, string company) {
 		this->speed = speed;
 		this->isBoost = isBoost;
 		this->company = company;
-		printf("Вызван конструктор с параметрами Processor(double speed, bool isBoost, string company) \n");
+		printf("Р’С‹Р·РІР°РЅ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё Processor(double speed, bool isBoost, string company) \n");
 	}
 
-	//Копирующий конструктор
+	//РљРѕРїРёСЂСѓСЋС‰РёР№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 	Processor(const Processor &p) {
 		this->speed = p.speed;
 		this->isBoost = p.isBoost;
 		this->company = p.company;
-		printf("Вызван копирующий конструктор Processor(const Processor &p) \n");
+		printf("Р’С‹Р·РІР°РЅ РєРѕРїРёСЂСѓСЋС‰РёР№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Processor(const Processor &p) \n");
 	}
 
-	//Деструктор класса
+	//Р”РµСЃС‚СЂСѓРєС‚РѕСЂ РєР»Р°СЃСЃР°
 	~Processor() {
-		printf("Вызван деструктор класса ~Processor(): Частота: %.1f ГГц, Разгон: %s, Про-во: %s \n", speed, isBoost ? "присутствует" : "отсутствует", company.c_str());
+		printf("Р’С‹Р·РІР°РЅ РґРµСЃС‚СЂСѓРєС‚РѕСЂ РєР»Р°СЃСЃР° ~Processor(): Р§Р°СЃС‚РѕС‚Р°: %.1f Р“Р“С†, Р Р°Р·РіРѕРЅ: %s, РџСЂРѕ-РІРѕ: %s \n", speed, isBoost ? "РїСЂРёСЃСѓС‚СЃС‚РІСѓРµС‚" : "РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚", company.c_str());
 	}
 
-	//Функция перемещения фигуры
+	//Р¤СѓРЅРєС†РёСЏ РїРµСЂРµРјРµС‰РµРЅРёСЏ С„РёРіСѓСЂС‹
 	void ChangeSpeed(double newSpeed) {
 		this->speed = newSpeed;
 	}
-	//Функция установки координат
+	//Р¤СѓРЅРєС†РёСЏ СѓСЃС‚Р°РЅРѕРІРєРё РєРѕРѕСЂРґРёРЅР°С‚
 	void ChangeBoostCap(bool isBoost);
 };
 
@@ -56,34 +56,34 @@ protected:
 	int videoMemory;
 	int coolerCount;
 public:
-	//Конструктор без параметров
+	//РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р±РµР· РїР°СЂР°РјРµС‚СЂРѕРІ
 	VideoProcessor() : Processor() {
 		videoMemory = 0;
 		coolerCount = 0;
 		company = "nvidia";
-		printf("Вызван конструктор VideoProcessor() \n");
+		printf("Р’С‹Р·РІР°РЅ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ VideoProcessor() \n");
 	}
 
-	//Конструктор с параметрами
+	//РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё
 	VideoProcessor(double speed, bool isBoost, string company, int videoMemory, int coolerCount) : Processor(speed, isBoost, company) {
 		this->videoMemory = videoMemory;
 		this->coolerCount = coolerCount;
-		printf("Вызван конструктор с параметрами VideoProcessor(double speed, bool isBoost, string company, int videoMemory, int coolerCount) \n");
+		printf("Р’С‹Р·РІР°РЅ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё VideoProcessor(double speed, bool isBoost, string company, int videoMemory, int coolerCount) \n");
 	}
 
-	//Копирующий конструктор
+	//РљРѕРїРёСЂСѓСЋС‰РёР№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 	VideoProcessor(const VideoProcessor &g) {
 		this->speed = g.speed;
 		this->isBoost = g.isBoost;
 		this->company = g.company;
 		this->videoMemory = g.videoMemory;
 		this->coolerCount = g.coolerCount;
-		printf("Вызван копирующий конструктор VideoProcessor(const VideoProcessor &g) \n");
+		printf("Р’С‹Р·РІР°РЅ РєРѕРїРёСЂСѓСЋС‰РёР№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ VideoProcessor(const VideoProcessor &g) \n");
 	}
 
-	//Деструктор класса
+	//Р”РµСЃС‚СЂСѓРєС‚РѕСЂ РєР»Р°СЃСЃР°
 	~VideoProcessor() {
-		printf("Вызван деструктор класса ~VideoProcessor(): Частота: %.1f ГГц, Разгон: %s, Про-во: %s, Видеопамять: %d, Кулеров: %i \n", speed, isBoost ? "присутствует" : "отсутствует", company.c_str(), videoMemory, coolerCount);
+		printf("Р’С‹Р·РІР°РЅ РґРµСЃС‚СЂСѓРєС‚РѕСЂ РєР»Р°СЃСЃР° ~VideoProcessor(): Р§Р°СЃС‚РѕС‚Р°: %.1f Р“Р“С†, Р Р°Р·РіРѕРЅ: %s, РџСЂРѕ-РІРѕ: %s, Р’РёРґРµРѕРїР°РјСЏС‚СЊ: %d, РљСѓР»РµСЂРѕРІ: %i \n", speed, isBoost ? "РїСЂРёСЃСѓС‚СЃС‚РІСѓРµС‚" : "РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚", company.c_str(), videoMemory, coolerCount);
 	}
 
 	void ChangeCoolerCount(int coolerCount) {
@@ -97,22 +97,22 @@ protected:
 	VideoProcessor* GPU;
 public:
 	Computer() {
-		printf("Вызван конструктор Computer() \n");
+		printf("Р’С‹Р·РІР°РЅ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Computer() \n");
 		CPU = new Processor;
 		GPU = new VideoProcessor;
 	}
 	Computer(double cpuSpeed, double gpuSpeed, bool cpuBoost, bool gpuBoost, string cpuCompany, string gpuCompany, int videoMemory, int coolerCount) {
-		printf("Вызван конструктор Computer(double speed, bool isBoost, string company, int videoMemory, int coolerCount) \n");
+		printf("Р’С‹Р·РІР°РЅ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Computer(double speed, bool isBoost, string company, int videoMemory, int coolerCount) \n");
 		CPU = new Processor(cpuSpeed, cpuBoost, cpuCompany);
 		GPU = new VideoProcessor(gpuSpeed, gpuBoost, gpuCompany, videoMemory, coolerCount);
 	}
 	Computer(const Computer& c) {
-		printf("Вызван конструктор Computer(const Computer& c) \n");
+		printf("Р’С‹Р·РІР°РЅ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Computer(const Computer& c) \n");
 		CPU = new Processor(*(c.CPU));
 		GPU = new VideoProcessor(*(c.GPU));
 	}
 	~Computer() {
-		printf("Вызван деструктор класса ~Computer() \n");
+		printf("Р’С‹Р·РІР°РЅ РґРµСЃС‚СЂСѓРєС‚РѕСЂ РєР»Р°СЃСЃР° ~Computer() \n");
 		delete CPU;
 		delete GPU;
 	}
@@ -130,9 +130,9 @@ int main() {
 
 		printf("\n");
 
-		//Помещение объекта класса VideoProcessor в переменную типа Processor
+		//РџРѕРјРµС‰РµРЅРёРµ РѕР±СЉРµРєС‚Р° РєР»Р°СЃСЃР° VideoProcessor РІ РїРµСЂРµРјРµРЅРЅСѓСЋ С‚РёРїР° Processor
 		Processor* g1 = new VideoProcessor(); 
-		//Из g2 мы не можем обратиться к функциям класса VideoProcessor
+		//РР· g2 РјС‹ РЅРµ РјРѕР¶РµРј РѕР±СЂР°С‚РёС‚СЊСЃСЏ Рє С„СѓРЅРєС†РёСЏРј РєР»Р°СЃСЃР° VideoProcessor
 
 		printf("\n");
 
