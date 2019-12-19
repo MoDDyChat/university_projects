@@ -27,8 +27,27 @@ namespace OOP_Lab36
 
         public override bool lookAtShape(int x, int y)
         {
-            if ((x >= this.x - width / 2) && (y >= this.y - height / 2) && (x <= this.x + this.width / 2) && (y <= this.y + this.height / 2))
+            if ((x >= this.x) && (y >= this.y) && (x <= this.x + this.width) && (y <= this.y + this.height))
                 return true;
+            return false;
+        }
+
+        public override bool borderCheck(int borderX, int borderY, bool isUp)
+        {
+            if (isUp)
+            {
+                if (borderX == -1 && this.y <= borderY)
+                    return true;
+                else if (borderY == -1 && this.x <= borderX)
+                    return true;
+            }
+            else
+            {
+                if (borderX == -1 && this.y + this.height >= borderY)
+                    return true;
+                else if (borderY == -1 && this.x + this.width >= borderX)
+                    return true;
+            }
             return false;
         }
     }

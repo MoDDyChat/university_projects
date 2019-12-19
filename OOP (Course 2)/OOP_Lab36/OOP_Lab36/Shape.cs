@@ -19,5 +19,7 @@ namespace OOP_Lab36
         public abstract void Paint(Graphics graphic);
 
         public abstract bool lookAtShape(int x, int y);
+
+        public abstract bool borderCheck(int borderX, int borderY, bool isUp);
     }
 }

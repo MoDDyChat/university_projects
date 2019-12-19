@@ -1,6 +1,6 @@
 ﻿namespace OOP_Lab36
 {
-    partial class Form
+    partial class Form1
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.colorSwitch = new System.Windows.Forms.ColorDialog();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
+            this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.CircleButton = new System.Windows.Forms.ToolStripMenuItem();
             this.RectButton = new System.Windows.Forms.ToolStripMenuItem();
             this.TriButton = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,6 +39,8 @@
             this.DeleteButton = new System.Windows.Forms.ToolStripButton();
             this.ChangeColorButton = new System.Windows.Forms.ToolStripButton();
             this.ChangeSizeButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.SelectAllButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.UnSelectAllButton = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.sizeXBox = new System.Windows.Forms.ToolStripTextBox();
@@ -48,6 +50,7 @@
             this.typeLbl = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.CountLbl = new System.Windows.Forms.ToolStripLabel();
+            this.testLbl = new System.Windows.Forms.ToolStripLabel();
             this.PaintPanel = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -67,7 +70,8 @@
             this.toolStripSeparator3,
             this.typeLbl,
             this.toolStripSeparator4,
-            this.CountLbl});
+            this.CountLbl,
+            this.testLbl});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1341, 32);
@@ -84,27 +88,27 @@
             this.toolStripSplitButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripSplitButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSplitButton2.Name = "toolStripSplitButton2";
-            this.toolStripSplitButton2.Size = new System.Drawing.Size(108, 29);
+            this.toolStripSplitButton2.Size = new System.Drawing.Size(105, 29);
             this.toolStripSplitButton2.Text = "Фигура";
             // 
             // CircleButton
             // 
             this.CircleButton.Name = "CircleButton";
-            this.CircleButton.Size = new System.Drawing.Size(252, 30);
+            this.CircleButton.Size = new System.Drawing.Size(227, 30);
             this.CircleButton.Text = "Круг";
             this.CircleButton.Click += new System.EventHandler(this.CircleButton_Click);
             // 
             // RectButton
             // 
             this.RectButton.Name = "RectButton";
-            this.RectButton.Size = new System.Drawing.Size(252, 30);
+            this.RectButton.Size = new System.Drawing.Size(227, 30);
             this.RectButton.Text = "Прямоугольник";
             this.RectButton.Click += new System.EventHandler(this.RectButton_Click);
             // 
             // TriButton
             // 
             this.TriButton.Name = "TriButton";
-            this.TriButton.Size = new System.Drawing.Size(252, 30);
+            this.TriButton.Size = new System.Drawing.Size(227, 30);
             this.TriButton.Text = "Треугольник";
             this.TriButton.Click += new System.EventHandler(this.TriButton_Click);
             // 
@@ -113,7 +117,9 @@
             this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.DeleteButton,
             this.ChangeColorButton,
-            this.ChangeSizeButton});
+            this.ChangeSizeButton,
+            this.SelectAllButton,
+            this.UnSelectAllButton});
             this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
             this.toolStripSplitButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -148,6 +154,20 @@
             this.ChangeSizeButton.Size = new System.Drawing.Size(323, 30);
             this.ChangeSizeButton.Text = "Изменить размер фигуры";
             this.ChangeSizeButton.Click += new System.EventHandler(this.ChangeSizeButton_Click);
+            // 
+            // SelectAllButton
+            // 
+            this.SelectAllButton.Name = "SelectAllButton";
+            this.SelectAllButton.Size = new System.Drawing.Size(323, 30);
+            this.SelectAllButton.Text = "Выделить всё";
+            this.SelectAllButton.Click += new System.EventHandler(this.SelectAllButton_Click);
+            // 
+            // UnSelectAllButton
+            // 
+            this.UnSelectAllButton.Name = "UnSelectAllButton";
+            this.UnSelectAllButton.Size = new System.Drawing.Size(323, 30);
+            this.UnSelectAllButton.Text = "Снять все выделения";
+            this.UnSelectAllButton.Click += new System.EventHandler(this.UnSelectAllButton_Click);
             // 
             // toolStripSeparator1
             // 
@@ -200,6 +220,12 @@
             this.CountLbl.Size = new System.Drawing.Size(120, 29);
             this.CountLbl.Text = "Элементов: 0";
             // 
+            // testLbl
+            // 
+            this.testLbl.Name = "testLbl";
+            this.testLbl.Size = new System.Drawing.Size(41, 29);
+            this.testLbl.Text = "test";
+            // 
             // PaintPanel
             // 
             this.PaintPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -209,15 +235,16 @@
             this.PaintPanel.TabIndex = 1;
             this.PaintPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.PaintPanel_Paint);
             this.PaintPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PaintPanel_MouseClick);
+            this.PaintPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PaintPanel_MouseMove);
             // 
-            // Form
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1341, 587);
             this.Controls.Add(this.PaintPanel);
             this.Controls.Add(this.toolStrip1);
-            this.Name = "Form";
+            this.Name = "Form1";
             this.Text = "Form";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form_KeyDown);
             this.toolStrip1.ResumeLayout(false);
@@ -240,14 +267,17 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripTextBox sizeYBox;
         private System.Windows.Forms.ToolStripMenuItem ChangeSizeButton;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton2;
-        private System.Windows.Forms.ToolStripMenuItem CircleButton;
-        private System.Windows.Forms.ToolStripMenuItem RectButton;
-        private System.Windows.Forms.ToolStripMenuItem TriButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel typeLbl;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripLabel CountLbl;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripSplitButton2;
+        private System.Windows.Forms.ToolStripMenuItem CircleButton;
+        private System.Windows.Forms.ToolStripMenuItem RectButton;
+        private System.Windows.Forms.ToolStripMenuItem TriButton;
+        private System.Windows.Forms.ToolStripMenuItem SelectAllButton;
+        private System.Windows.Forms.ToolStripMenuItem UnSelectAllButton;
+        private System.Windows.Forms.ToolStripLabel testLbl;
     }
 }
 

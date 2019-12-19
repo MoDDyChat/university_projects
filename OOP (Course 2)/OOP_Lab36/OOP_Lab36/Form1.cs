@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace OOP_Lab36
 {
-    public partial class Form : System.Windows.Forms.Form
+    public partial class Form1 : System.Windows.Forms.Form
     {
         private Storage<Shape> shapes;
         public int GWidth;
         public int GHeight;
         public int shapeType = 1;
 
-        public Form()
+        public Form1()
         {
             InitializeComponent();
 
@@ -28,6 +28,7 @@ namespace OOP_Lab36
 
             sizeXBox.Text = GWidth.ToString();
             sizeYBox.Text = GHeight.ToString();
+            
         }
 
         private bool SelectShape(int x, int y)
@@ -96,18 +97,37 @@ namespace OOP_Lab36
             PaintPanel.Refresh();
         }
 
+        private void selectAll()
+        {
+            for (shapes.First(); !shapes.isEnd(); shapes.Next())
+            {
+                shapes.Current().isSelected = true;
+            }
+            PaintPanel.Refresh();
+        }
+
+        private void unSelectAll()
+        {
+            for (shapes.First(); !shapes.isEnd(); shapes.Next())
+            {
+                shapes.Current().isSelected = false;
+            }
+            PaintPanel.Refresh();
+        }
+
+
         private void PaintPanel_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                if (!SelectShape(e.X - GWidth / 2, e.Y - GHeight / 2))
+                if (!SelectShape(e.X, e.Y))
                 {
                     if (shapeType == 1)
                         shapes.AddFirst(new Circle(e.X - GWidth / 2, e.Y - GHeight / 2, GWidth, GHeight));
                     else if (shapeType == 2)
-                        shapes.AddFirst(new Rectangle(e.X - GWidth / 2, e.Y - GHeight / 2, GWidth, GHeight));
+                        shapes.AddFirst(new Rectangle(e.X, e.Y, GWidth, GHeight));
                     else if (shapeType == 3)
-                        shapes.AddFirst(new Triangle(e.X - GWidth / 2, e.Y + GHeight / 2, GWidth, GHeight));
+                        shapes.AddFirst(new Triangle(e.X, e.Y, GWidth, GHeight));
                 }
                 CountLbl.Text = "Элементов: " + shapes.Count.ToString();
                 PaintPanel.Refresh();
@@ -149,11 +169,11 @@ namespace OOP_Lab36
             changeSizeSelectedShapes();
         }
 
-        private void MoveShape(int dx, int dy)
+        private void MoveShape(int dx, int dy, int bx, int by, bool isUp)
         {
             for (shapes.First(); !shapes.isEnd(); shapes.Next())
             {
-                if (shapes.Current().isSelected == true)
+                if (shapes.Current().isSelected == true && !shapes.Current().borderCheck(bx, by, isUp))
                 {
                     shapes.Current().x += dx;
                     shapes.Current().y += dy;
@@ -167,16 +187,16 @@ namespace OOP_Lab36
             switch(e.KeyCode)
             {
                 case Keys.W:
-                    MoveShape(0, -2);
+                    MoveShape(0, -2, -1, 0, true);
                     break;
                 case Keys.A:
-                    MoveShape(-2, 0);
+                    MoveShape(-2, 0, 0, -1, true);
                     break;
                 case Keys.S:
-                    MoveShape(0, 2);
+                    MoveShape(0, 2, -1, PaintPanel.Size.Height, false);
                     break;
                 case Keys.D:
-                    MoveShape(2, 0);
+                    MoveShape(2, 0, PaintPanel.Size.Width, -1, false);
                     break;
             }
         }
@@ -197,6 +217,21 @@ namespace OOP_Lab36
         {
             shapeType = 3;
             typeLbl.Text = "Выбрано: Треугольник";
+        }
+
+        private void SelectAllButton_Click(object sender, EventArgs e)
+        {
+            selectAll();
+        }
+
+        private void UnSelectAllButton_Click(object sender, EventArgs e)
+        {
+            unSelectAll();
+        }
+
+        private void PaintPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            testLbl.Text = PaintPanel.Size.ToString() + " | " + e.Location.ToString();
         }
     }
 }

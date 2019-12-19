@@ -27,8 +27,29 @@ namespace OOP_Lab36
 
         public override bool lookAtShape(int x, int y)
         {
-            if (Math.Pow(x - this.x, 2) / Math.Pow(this.width / 2, 2) + Math.Pow(y - this.y, 2) / Math.Pow(this.height / 2, 2) <= 1)
+            int oX = x - this.width / 2;
+            int oY = y - this.height / 2;
+            if (Math.Pow(oX - this.x, 2) / Math.Pow(this.width / 2, 2) + Math.Pow(oY - this.y, 2) / Math.Pow(this.height / 2, 2) <= 1)
                 return true;
+            return false;
+        }
+
+        public override bool borderCheck(int borderX, int borderY, bool isUp)
+        {
+            if (isUp)
+            {
+                if (borderX == -1 && this.y <= borderY)
+                    return true;
+                else if (borderY == -1 && this.x <= borderX)
+                    return true;
+            }
+            else
+            {
+                if(borderX == -1 && this.y + this.height >= borderY)
+                    return true;
+                else if (borderY == -1 && this.x + this.width >= borderX)
+                    return true;
+            }
             return false;
         }
     }
