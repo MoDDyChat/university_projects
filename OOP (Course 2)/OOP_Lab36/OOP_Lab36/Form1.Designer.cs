@@ -183,7 +183,7 @@
             // sizeXBox
             // 
             this.sizeXBox.Name = "sizeXBox";
-            this.sizeXBox.Size = new System.Drawing.Size(100, 32);
+            this.sizeXBox.Size = new System.Drawing.Size(70, 32);
             this.sizeXBox.TextChanged += new System.EventHandler(this.SizeXBox_TextChanged);
             // 
             // toolStripSeparator2
@@ -195,7 +195,7 @@
             // 
             this.sizeYBox.BackColor = System.Drawing.SystemColors.HighlightText;
             this.sizeYBox.Name = "sizeYBox";
-            this.sizeYBox.Size = new System.Drawing.Size(100, 32);
+            this.sizeYBox.Size = new System.Drawing.Size(70, 32);
             this.sizeYBox.TextChanged += new System.EventHandler(this.SizeYBox_TextChanged);
             // 
             // toolStripSeparator3
@@ -228,6 +228,7 @@
             // 
             // PaintPanel
             // 
+            this.PaintPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PaintPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PaintPanel.Location = new System.Drawing.Point(0, 32);
             this.PaintPanel.Name = "PaintPanel";

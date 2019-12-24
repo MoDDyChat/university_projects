@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,6 +22,8 @@ namespace OOP_Lab36
         {
             InitializeComponent();
 
+            typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PaintPanel, new object[] { true });
+
             shapes = new Storage<Shape>();
 
             GWidth = 100;
@@ -28,13 +31,12 @@ namespace OOP_Lab36
 
             sizeXBox.Text = GWidth.ToString();
             sizeYBox.Text = GHeight.ToString();
-            
         }
 
         private bool SelectShape(int x, int y)
         {
             Shape shape;
-            for (shapes.First(); !shapes.isEnd(); shapes.Next())
+            for (shapes.Last(); !shapes.isEnd(); shapes.Prev())
             {
                 shape = shapes.Current();
                 if (shape.lookAtShape(x, y))
@@ -171,12 +173,19 @@ namespace OOP_Lab36
 
         private void MoveShape(int dx, int dy, int bx, int by, bool isUp)
         {
+            Shape shape;
             for (shapes.First(); !shapes.isEnd(); shapes.Next())
             {
-                if (shapes.Current().isSelected == true && !shapes.Current().borderCheck(bx, by, isUp))
+                shape = shapes.Current();
+                if (shape.isSelected == true)
                 {
-                    shapes.Current().x += dx;
-                    shapes.Current().y += dy;
+                    shape.x += dx;
+                    shape.y += dy;
+                    if (shape.borderCheck(bx, by, isUp))
+                    {
+                        shape.x -= dx;
+                        shape.y -= dy;
+                    }
                 }
             }
             PaintPanel.Refresh();
@@ -186,17 +195,28 @@ namespace OOP_Lab36
         {
             switch(e.KeyCode)
             {
-                case Keys.W:
-                    MoveShape(0, -2, -1, 0, true);
+                case Keys.Up:
+                    MoveShape(0, -5, -1, 0, true);
+                    break;
+                case Keys.Left:
+                    MoveShape(-5, 0, 0, -1, true);
+                    break;
+                case Keys.Down:
+                    MoveShape(0, 5, -1, PaintPanel.Size.Height, false);
+                    break;
+                case Keys.Right:
+                    MoveShape(5, 0, PaintPanel.Size.Width, -1, false);
                     break;
                 case Keys.A:
-                    MoveShape(-2, 0, 0, -1, true);
-                    break;
-                case Keys.S:
-                    MoveShape(0, 2, -1, PaintPanel.Size.Height, false);
+                    if (e.Control)
+                        selectAll();
                     break;
                 case Keys.D:
-                    MoveShape(2, 0, PaintPanel.Size.Width, -1, false);
+                    if (e.Control)
+                        unSelectAll();
+                    break;
+                case Keys.Delete:
+                    deleteSelectedShapes();
                     break;
             }
         }
