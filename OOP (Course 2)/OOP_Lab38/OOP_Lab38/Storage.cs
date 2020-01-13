@@ -145,6 +145,13 @@ namespace OOP_Lab38
             }
         }
 
+        public void Clear()
+        {
+            First();
+            while (!isEnd())
+                Remove();
+        }
+
         public void Remove(T item)
         {
             for (First(); !isEnd(); Next())
@@ -156,5 +163,6 @@ namespace OOP_Lab38
                 }
             }
         }
+
     }
 }

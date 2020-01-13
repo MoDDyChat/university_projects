@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.IO;
 
 namespace OOP_Lab38
 {
@@ -32,6 +33,12 @@ namespace OOP_Lab38
             if (Math.Pow(oX - this.x, 2) / Math.Pow(this.width / 2, 2) + Math.Pow(oY - this.y, 2) / Math.Pow(this.height / 2, 2) <= 1)
                 return true;
             return false;
+        }
+
+        public override void Save(StreamWriter sw)
+        {
+            sw.WriteLine("C");
+            base.Save(sw);
         }
 
         public override bool borderCheck(int borderX, int borderY, bool isUp)

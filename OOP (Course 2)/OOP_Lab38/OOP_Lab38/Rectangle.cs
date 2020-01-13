@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.IO;
 
 namespace OOP_Lab38
 {
@@ -30,6 +31,12 @@ namespace OOP_Lab38
             if ((x >= this.x) && (y >= this.y) && (x <= this.x + this.width) && (y <= this.y + this.height))
                 return true;
             return false;
+        }
+
+        public override void Save(StreamWriter sw)
+        {
+            sw.WriteLine("R");
+            base.Save(sw);
         }
 
         public override bool borderCheck(int borderX, int borderY, bool isUp)

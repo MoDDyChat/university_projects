@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,31 @@ namespace OOP_Lab38
         public void Remove(Shape shape)
         {
             groupShapes.Remove(shape);
+        }
+
+        public override void Load(StreamReader sr)
+        {
+            groupShapes.Clear();
+            var count = Convert.ToInt32(sr.ReadLine().Split('=')[1]);
+            IShapeFactory factory = new ShapeFactory();
+            Shape shape;
+            for (int i = 0; i < count; i++)
+            {
+                var code = sr.ReadLine();
+                shape = factory.createShape(code);
+                shape.Load(sr);
+                Add(shape);
+            }
+        }
+
+        public override void Save(StreamWriter sw)
+        {
+            sw.WriteLine("G");
+            sw.WriteLine($"count={groupShapes.Count}");
+            for (groupShapes.First(); !groupShapes.isEnd(); groupShapes.Next())
+            {
+                groupShapes.Current().Save(sw);
+            }
         }
 
         public override Storage<Shape> getGroupElem()

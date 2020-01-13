@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.colorSwitch = new System.Windows.Forms.ColorDialog();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripDropDownButton();
@@ -53,6 +54,11 @@
             this.testLbl = new System.Windows.Forms.ToolStripLabel();
             this.PaintPanel = new System.Windows.Forms.Panel();
             this.unGroupBtn = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripSplitButton3 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.saveToFileBtn = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadFormFileBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,6 +67,7 @@
             this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSplitButton3,
             this.toolStripSplitButton2,
             this.toolStripSplitButton1,
             this.toolStripSeparator1,
@@ -251,6 +258,36 @@
             this.unGroupBtn.Text = "Распустить группу";
             this.unGroupBtn.Click += new System.EventHandler(this.UnGroupBtn_Click);
             // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
+            // 
+            // toolStripSplitButton3
+            // 
+            this.toolStripSplitButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripSplitButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToFileBtn,
+            this.loadFormFileBtn});
+            this.toolStripSplitButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton3.Image")));
+            this.toolStripSplitButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton3.Name = "toolStripSplitButton3";
+            this.toolStripSplitButton3.Size = new System.Drawing.Size(71, 29);
+            this.toolStripSplitButton3.Text = "Файл";
+            // 
+            // saveToFileBtn
+            // 
+            this.saveToFileBtn.Name = "saveToFileBtn";
+            this.saveToFileBtn.Size = new System.Drawing.Size(253, 30);
+            this.saveToFileBtn.Text = "Сохранить в файл";
+            this.saveToFileBtn.Click += new System.EventHandler(this.SaveToFileBtn_Click);
+            // 
+            // loadFormFileBtn
+            // 
+            this.loadFormFileBtn.Name = "loadFormFileBtn";
+            this.loadFormFileBtn.Size = new System.Drawing.Size(253, 30);
+            this.loadFormFileBtn.Text = "Загрузить из файла";
+            this.loadFormFileBtn.Click += new System.EventHandler(this.LoadFormFileBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -294,6 +331,11 @@
         private System.Windows.Forms.ToolStripLabel testLbl;
         private System.Windows.Forms.ToolStripMenuItem shapesToGroupBtn;
         private System.Windows.Forms.ToolStripMenuItem unGroupBtn;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripSplitButton3;
+        private System.Windows.Forms.ToolStripMenuItem saveToFileBtn;
+        private System.Windows.Forms.ToolStripMenuItem loadFormFileBtn;
     }
 }
 

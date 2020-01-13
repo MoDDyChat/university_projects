@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.IO;
 
 namespace OOP_Lab38
 {
@@ -44,6 +45,12 @@ namespace OOP_Lab38
             if (Area(point1, point2, point3) == Area(point1, point2, point4) + Area(point1, point4, point3) + Area(point2, point4, point3))
                 return true;
             return false;
+        }
+
+        public override void Save(StreamWriter sw)
+        {
+            sw.WriteLine("T");
+            base.Save(sw);
         }
 
         public override bool borderCheck(int borderX, int borderY, bool isUp)

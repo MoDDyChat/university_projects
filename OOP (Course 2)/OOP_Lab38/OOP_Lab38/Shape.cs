@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.IO;
 
 namespace OOP_Lab38
 {
@@ -36,6 +37,23 @@ namespace OOP_Lab38
         {
             x += dx;
             y += dy;
+        }
+
+        public virtual void Load(StreamReader sr)
+        {
+            x = Convert.ToInt32(sr.ReadLine().Split('=')[1]);
+            y = Convert.ToInt32(sr.ReadLine().Split('=')[1]);
+            width = Convert.ToInt32(sr.ReadLine().Split('=')[1]);
+            height = Convert.ToInt32(sr.ReadLine().Split('=')[1]);
+            color = Color.FromArgb(Convert.ToInt32(sr.ReadLine().Split('=')[1]));
+        }
+        public virtual void Save(StreamWriter sw)
+        {
+            sw.WriteLine($"x={x}");
+            sw.WriteLine($"y={y}");
+            sw.WriteLine($"width={width}");
+            sw.WriteLine($"height={height}");
+            sw.WriteLine($"color={color.ToArgb()}");
         }
 
         public virtual void changeSize(int x, int y)

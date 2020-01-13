@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -241,6 +242,42 @@ namespace OOP_Lab38
             PaintPanel.Refresh();
         }
 
+        public void LoadFigures()
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamReader sr = new StreamReader(openFileDialog.FileName))
+                {
+                    shapes.Clear();
+                    var count = Convert.ToInt32(sr.ReadLine());
+                    IShapeFactory factory = new ShapeFactory();
+                    Shape shape;
+                    for (int i = 0; i < count; i++)
+                    {
+                        var code = sr.ReadLine();
+                        shape = factory.createShape(code);
+                        shape.Load(sr);
+                        shapes.AddLast(shape);
+                    }
+                }
+            }
+
+        }
+
+        public void SaveFigures()
+        {
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamWriter sw = new StreamWriter(saveFileDialog.FileName))
+                {
+                    sw.WriteLine(shapes.Count);
+                    for (shapes.First(); !shapes.isEnd(); shapes.Next())
+                        shapes.Current().Save(sw);
+                }
+            }
+        }
+
+
         public void shapesUngroup()
         {
             for (shapes.First(); !shapes.isEnd();)
@@ -304,6 +341,17 @@ namespace OOP_Lab38
         private void UnGroupBtn_Click(object sender, EventArgs e)
         {
             shapesUngroup();
+        }
+
+        private void SaveToFileBtn_Click(object sender, EventArgs e)
+        {
+            SaveFigures();
+        }
+
+        private void LoadFormFileBtn_Click(object sender, EventArgs e)
+        {
+            LoadFigures();
+            PaintPanel.Refresh();
         }
     }
 }
