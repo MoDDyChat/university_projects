@@ -108,7 +108,8 @@ public:
 	}
 	Computer(const Computer& c) {
 		printf("Вызван конструктор Computer(const Computer& c) \n");
-		CPU = new Processor(*(c.CPU));
+		CPU = new Processor((c.CPU));
+		//CPU = *(c.CPU)
 		GPU = new VideoProcessor(*(c.GPU));
 	}
 	~Computer() {
@@ -132,7 +133,7 @@ int main() {
 
 		//Помещение объекта класса VideoProcessor в переменную типа Processor
 		Processor* g1 = new VideoProcessor(); 
-		//Из g2 мы не можем обратиться к функциям класса VideoProcessor
+		//Из g1 мы не можем обратиться к методам класса VideoProcessor
 
 		printf("\n");
 

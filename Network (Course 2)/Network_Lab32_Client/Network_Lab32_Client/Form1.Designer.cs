@@ -41,6 +41,8 @@
             this.logBox = new System.Windows.Forms.TextBox();
             this.sendBtn = new System.Windows.Forms.Button();
             this.inputBox = new System.Windows.Forms.TextBox();
+            this.passBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listBox
@@ -128,7 +130,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(71, 19);
+            this.label4.Location = new System.Drawing.Point(69, 23);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(117, 20);
             this.label4.TabIndex = 15;
@@ -162,11 +164,31 @@
             this.inputBox.TabIndex = 17;
             this.inputBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputBox_KeyDown);
             // 
+            // passBox
+            // 
+            this.passBox.Location = new System.Drawing.Point(252, 52);
+            this.passBox.Name = "passBox";
+            this.passBox.Size = new System.Drawing.Size(187, 26);
+            this.passBox.TabIndex = 19;
+            this.passBox.Text = "password";
+            this.passBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(290, 23);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(108, 20);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "Ваш Пароль:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(958, 450);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.passBox);
             this.Controls.Add(this.sendBtn);
             this.Controls.Add(this.inputBox);
             this.Controls.Add(this.logBox);
@@ -201,6 +223,8 @@
         public System.Windows.Forms.TextBox logBox;
         private System.Windows.Forms.Button sendBtn;
         private System.Windows.Forms.TextBox inputBox;
+        private System.Windows.Forms.TextBox passBox;
+        private System.Windows.Forms.Label label5;
     }
 }
 

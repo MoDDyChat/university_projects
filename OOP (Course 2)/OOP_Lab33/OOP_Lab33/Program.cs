@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace OOP_Lab33
 {
@@ -12,8 +13,8 @@ namespace OOP_Lab33
             {
                 Console.WriteLine("1: Вставить объект в хранилище");
                 Console.WriteLine("2: Удалить объект из хранилища");
-                Console.WriteLine("3: Добавить объект в конец хранилища");
-                Console.WriteLine("4: Получить информацию о объекте по индексу");
+                Console.WriteLine("3: Вызвать функции объекта по номеру");
+                Console.WriteLine("4: Получить информацию о объекте по номеру");
                 Console.WriteLine("5: Узнать количество элементов в хранилище");
                 Console.WriteLine("6: Протестировать хранилище");
                 Console.WriteLine("7: Завершить программу");
@@ -38,7 +39,7 @@ namespace OOP_Lab33
                             int figure = Int32.Parse(Console.ReadLine());
 
                             Console.Clear();
-                            Console.WriteLine("По какому индексу вставить объект? - ");
+                            Console.WriteLine("По какому номеру вставить объект? - ");
                             int index = Int32.Parse(Console.ReadLine());
                             if (index > shapes.Count)
                                 index = shapes.Count + 1;
@@ -49,7 +50,7 @@ namespace OOP_Lab33
                                 shapes.Insert(new Square(), index);
 
                             Console.Clear();
-                            Console.WriteLine(String.Format("Объект успешно добавлен в хранилище под индексом: {0}!", index));
+                            Console.WriteLine(String.Format("Объект успешно добавлен в хранилище под номеру: {0}!", index));
                             Console.ReadKey();
                             Console.Clear();
                             break;
@@ -58,10 +59,10 @@ namespace OOP_Lab33
                     case 2:
                         {
                             Console.Clear();
-                            Console.WriteLine("По какому индексу удалить объект? - ");
+                            Console.WriteLine("По какому номеру удалить объект? - ");
                             int index = Int32.Parse(Console.ReadLine());
                             shapes.Remove(index);
-                            Console.WriteLine(String.Format("Объект по индексу {0} был успешно удалён!", index));
+                            Console.WriteLine(String.Format("Объект по номеру {0} был успешно удалён!", index));
                             Console.ReadKey();
                             Console.Clear();
                             break;
@@ -69,24 +70,70 @@ namespace OOP_Lab33
                     case 3:
                         {
                             Console.Clear();
-                            Console.WriteLine("Выберете тип добавляемого объекта: ");
-                            Console.WriteLine("1. Круг");
-                            Console.WriteLine("2. Квадрат");
-                            int figure = Int32.Parse(Console.ReadLine());
-                            if (figure == 1)
-                                shapes.AddLast(new Circle());
-                            else
-                                shapes.AddLast(new Square());
-                            Console.Clear();
-                            Console.WriteLine("Объект успешно добавлен в хранилище!");
-                            Console.ReadKey();
-                            Console.Clear();
+                            Console.WriteLine("По какому номеру вызвать функцию? - ");
+                            int index = Int32.Parse(Console.ReadLine());
+                            if (shapes.getObjectByIndex(index) is Circle c)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Это объект типа Circle \n \n ");
+                                Console.WriteLine("Выберете операцию: ");
+                                Console.WriteLine("1. Передвинуть фигуру");
+                                Console.WriteLine("2. Изменить радиус");
+                                int ch = Int32.Parse(Console.ReadLine());
+                                if (ch == 1)
+                                {
+                                    Console.WriteLine("\nВведите две изменяемые координаты через пробел: ");
+                                    int dx = Int32.Parse(Console.ReadLine());
+                                    int dy = Int32.Parse(Console.ReadLine());
+                                    c.moveShape(dx, dy);
+                                    Console.WriteLine("\nФигура успешно передвинута! Новые координаты: " + c.X + " " + c.Y);
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                }
+                                else if (ch == 2)
+                                {
+                                    Console.WriteLine("\nВведите разницу нового радиуса ");
+                                    int dr = Int32.Parse(Console.ReadLine());
+                                    c.changeRadius(dr);
+                                    Console.WriteLine("\nРадиус фигуры изменён! Новый радиус: " + c.Radius);
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                }
+                            }
+                            else if (shapes.getObjectByIndex(index) is Square s)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Это объект типа Square \n \n ");
+                                Console.WriteLine("Выберете операцию: ");
+                                Console.WriteLine("1. Передвинуть фигуру");
+                                Console.WriteLine("2. Изменить длину");
+                                int ch = Int32.Parse(Console.ReadLine());
+                                if (ch == 1)
+                                {
+                                    Console.WriteLine("\nВведите две изменяемые координаты через пробел: ");
+                                    int dx = Int32.Parse(Console.ReadLine());
+                                    int dy = Int32.Parse(Console.ReadLine());
+                                    s.moveShape(dx, dy);
+                                    Console.WriteLine("\nФигура успешно передвинута! Новые координаты: " + s.X + " " + s.Y);
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                }
+                                else if (ch == 2)
+                                {
+                                    Console.WriteLine("\nВведите разницу новой длины ");
+                                    int dl = Int32.Parse(Console.ReadLine());
+                                    s.changeRadius(dl);
+                                    Console.WriteLine("\nДлина фигуры изменена. Новая длина: " + s.Length);
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                }
+                            }
                             break;
                         }
                     case 4:
                         {
                             Console.Clear();
-                            Console.WriteLine("По какому индексу получить информацию? ");
+                            Console.WriteLine("По какому номеру получить информацию? ");
                             int index = Int32.Parse(Console.ReadLine());
                             if (index > shapes.Count)
                             {
@@ -112,10 +159,11 @@ namespace OOP_Lab33
                         break;
                     case 6:
                         {
+                            var stopWatch = Stopwatch.StartNew();
                             //var date1 = new DateTime();
                             var rand = new Random();
                             Storage<Shape> shapes1 = new Storage<Shape>();
-                            for (int i = 0; i < 10000; i++)
+                            for (int i = 0; i < 1000000; i++)
                             {
                                 switch (rand.Next(0, 2))
                                 {
@@ -137,10 +185,9 @@ namespace OOP_Lab33
                                         break;
                                 }
                             }
-                            //var date2 = new DateTime();
-                            //TimeSpan interval = date2 - date1;
+                            
                             Console.WriteLine(String.Format("Тестирование завершено! "));
-                            //Console.WriteLine("Это заняло: ", interval.Ticks);
+                            Console.WriteLine("Это заняло: " + stopWatch.ElapsedMilliseconds + " миллисекунд");
                             Console.ReadKey();
                             Console.Clear();
                             break;

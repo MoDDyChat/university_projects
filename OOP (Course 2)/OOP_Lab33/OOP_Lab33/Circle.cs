@@ -8,7 +8,6 @@ namespace OOP_Lab33
 {
     class Circle : Shape
     {
-        float radius;
 
         public float Radius
         {

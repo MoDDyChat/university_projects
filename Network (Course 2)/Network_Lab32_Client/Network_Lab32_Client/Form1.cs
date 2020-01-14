@@ -42,6 +42,11 @@ namespace Network_Lab32_Client
                 byte[] buffer = new byte[8196];
                 int bytesRec = _serverSocket.Receive(buffer);
                 string data = Encoding.UTF8.GetString(buffer, 0, bytesRec);
+                if (data.Contains("#wrongpass$"))
+                {
+                    disconnect();
+                    continue;
+                }
                 if (data.Contains("$updatelist"))
                 {
                     UpdateList(data);
@@ -175,10 +180,15 @@ namespace Network_Lab32_Client
             _clientThread.IsBackground = true;
             _clientThread.Start();
             string Name = nickBox.Text;
+            string Pass = passBox.Text;
             if (string.IsNullOrEmpty(Name)) return;
-            send("#setname&" + Name);
+            send("#setnameandpass&" + Name + "%" + Pass);
             logBox.Enabled = true;
             inputBox.Enabled = true;
+            sendBtn.Enabled = true;
+            sendBtn.Enabled = true;
+            sendBtn.Enabled = true;
+            sendBtn.Enabled = true;
             sendBtn.Enabled = true;
             nickBox.Enabled = false;
             connectBtn.Enabled = false;

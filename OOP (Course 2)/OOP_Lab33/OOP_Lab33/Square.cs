@@ -8,7 +8,6 @@ namespace OOP_Lab33
 {
     class Square : Shape
     {
-        float length;
 
         public float Length
         {

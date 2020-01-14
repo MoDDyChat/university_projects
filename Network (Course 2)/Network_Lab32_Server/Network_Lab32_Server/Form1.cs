@@ -19,6 +19,7 @@ namespace Network_Lab32_Server
         private string _serverHost = "127.0.0.1";
         private int _serverPort = 21719;
         private static Thread _serverThread;
+        
         public Form1()
         {
             InitializeComponent();

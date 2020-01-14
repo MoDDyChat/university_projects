@@ -11,6 +11,7 @@ namespace Network_Lab32_Server
     public class Client
     {
         private string _userName;
+        private string _passWord;
         private Socket _handler;
         private Thread _userThread;
         public Client(Socket socket)
@@ -24,6 +25,12 @@ namespace Network_Lab32_Server
         {
             get { return _userName; }
         }
+
+        public string Password
+        {
+            get { return _passWord; }
+        }
+
         private void listner()
         {
             while (true)
@@ -35,7 +42,11 @@ namespace Network_Lab32_Server
                     string data = Encoding.UTF8.GetString(buffer, 0, bytesRec);
                     handleCommand(data);
                 }
-                catch { Server.EndClient(this); return; }
+                catch {
+                    Server.EndClient(this);
+                    Server.disTrigger = false;
+                    return;
+                }
             }
         }
         public void End()
@@ -47,7 +58,7 @@ namespace Network_Lab32_Server
                 {
                     _userThread.Abort();
                 }
-                catch { } // г
+                catch { }
             }
             catch { }
         }
@@ -57,18 +68,21 @@ namespace Network_Lab32_Server
             {
                 _handler.Close();
             }
-            if (data.Contains("#setname"))
+            if (data.Contains("#setnameandpass"))
             {
-                _userName = data.Split('&')[1];
-                UpdateChat();
-                return;
+                _userName = data.Split('&')[1].Split('%')[0];
+                _passWord = data.Split('&')[1].Split('%')[1];
+                
             }
             if (data.Contains("#newmsg"))
             {
                 string message = data.Split('&')[1];
                 ChatController.AddMessage(_userName, message);
-                return;
             }
+            //Thread.Sleep(5000);
+            UpdateChat();
+            return;
+
         }
         public void UpdateChat()
         {

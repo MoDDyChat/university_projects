@@ -30,6 +30,7 @@ namespace OOP_Lab33
 
         //Последний элемент
         private Node last;
+
         public void Last()
         {
             current = last;

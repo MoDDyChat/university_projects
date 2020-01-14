@@ -44,7 +44,7 @@ namespace Network_Lab31_Adresses
                     return ip;
                 }
             }
-            throw new Exception("No network adapters with an IPv4 address in the system!");
+            throw new Exception("Нет подходящих сетевых адаптеров");
         }
 
         private IPAddress getSubnetMask(IPAddress address)
@@ -62,7 +62,7 @@ namespace Network_Lab31_Adresses
                     }
                 }
             }
-            throw new ArgumentException(string.Format("Can't find subnetmask for IP address '{0}'", address));
+            throw new ArgumentException(string.Format("Не получилось найти маску подсети для адреса: '{0}'", address));
         }
 
         private string getMACAddress()
@@ -102,6 +102,7 @@ namespace Network_Lab31_Adresses
             return new IPAddress(broadcastIPBytes);
         }
 
+        //Входные значения, просто чтобы каждый раз не вводить при тесте
         string startIP = "193.233.146.242";
         string lastIP = "193.233.146.245";
 

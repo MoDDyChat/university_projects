@@ -65,10 +65,14 @@
             this.subCheckBox = new System.Windows.Forms.CheckedListBox();
             this.nationCheckBtn = new System.Windows.Forms.RadioButton();
             this.successBtn = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.winPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Mouse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CatBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ageForm)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuBox
@@ -86,7 +90,7 @@
             this.menuBox.Location = new System.Drawing.Point(257, 58);
             this.menuBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.menuBox.Name = "menuBox";
-            this.menuBox.Size = new System.Drawing.Size(286, 21);
+            this.menuBox.Size = new System.Drawing.Size(286, 28);
             this.menuBox.TabIndex = 0;
             this.menuBox.TextChanged += new System.EventHandler(this.menuBox_TextChanged);
             // 
@@ -96,7 +100,7 @@
             this.menuLbl.Location = new System.Drawing.Point(384, 29);
             this.menuLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.menuLbl.Name = "menuLbl";
-            this.menuLbl.Size = new System.Drawing.Size(36, 13);
+            this.menuLbl.Size = new System.Drawing.Size(52, 20);
             this.menuLbl.TabIndex = 1;
             this.menuLbl.Text = "Меню";
             // 
@@ -106,7 +110,7 @@
             this.testLbl.Location = new System.Drawing.Point(712, 29);
             this.testLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.testLbl.Name = "testLbl";
-            this.testLbl.Size = new System.Drawing.Size(13, 13);
+            this.testLbl.Size = new System.Drawing.Size(18, 20);
             this.testLbl.TabIndex = 2;
             this.testLbl.Text = "0";
             // 
@@ -115,7 +119,7 @@
             this.FirstNumber.Location = new System.Drawing.Point(128, 223);
             this.FirstNumber.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.FirstNumber.Name = "FirstNumber";
-            this.FirstNumber.Size = new System.Drawing.Size(148, 20);
+            this.FirstNumber.Size = new System.Drawing.Size(148, 26);
             this.FirstNumber.TabIndex = 3;
             this.FirstNumber.TextChanged += new System.EventHandler(this.Number_TextChanged);
             // 
@@ -124,7 +128,7 @@
             this.SecondNumber.Location = new System.Drawing.Point(326, 223);
             this.SecondNumber.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.SecondNumber.Name = "SecondNumber";
-            this.SecondNumber.Size = new System.Drawing.Size(148, 20);
+            this.SecondNumber.Size = new System.Drawing.Size(148, 26);
             this.SecondNumber.TabIndex = 4;
             this.SecondNumber.TextChanged += new System.EventHandler(this.Number_TextChanged);
             // 
@@ -134,7 +138,7 @@
             this.Result.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Result.Name = "Result";
             this.Result.ReadOnly = true;
-            this.Result.Size = new System.Drawing.Size(148, 20);
+            this.Result.Size = new System.Drawing.Size(148, 26);
             this.Result.TabIndex = 5;
             // 
             // justEquis
@@ -165,7 +169,7 @@
             this.testXCoord.AutoSize = true;
             this.testXCoord.Location = new System.Drawing.Point(22, 28);
             this.testXCoord.Name = "testXCoord";
-            this.testXCoord.Size = new System.Drawing.Size(13, 13);
+            this.testXCoord.Size = new System.Drawing.Size(18, 20);
             this.testXCoord.TabIndex = 3;
             this.testXCoord.Text = "0";
             // 
@@ -174,7 +178,7 @@
             this.testYCoord.AutoSize = true;
             this.testYCoord.Location = new System.Drawing.Point(22, 48);
             this.testYCoord.Name = "testYCoord";
-            this.testYCoord.Size = new System.Drawing.Size(13, 13);
+            this.testYCoord.Size = new System.Drawing.Size(18, 20);
             this.testYCoord.TabIndex = 4;
             this.testYCoord.Text = "0";
             // 
@@ -188,7 +192,7 @@
             this.watchHours.Location = new System.Drawing.Point(206, 190);
             this.watchHours.Name = "watchHours";
             this.watchHours.ReadOnly = true;
-            this.watchHours.Size = new System.Drawing.Size(100, 20);
+            this.watchHours.Size = new System.Drawing.Size(100, 26);
             this.watchHours.TabIndex = 5;
             this.watchHours.Text = "0";
             // 
@@ -197,7 +201,7 @@
             this.watchMinutes.Location = new System.Drawing.Point(358, 190);
             this.watchMinutes.Name = "watchMinutes";
             this.watchMinutes.ReadOnly = true;
-            this.watchMinutes.Size = new System.Drawing.Size(100, 20);
+            this.watchMinutes.Size = new System.Drawing.Size(100, 26);
             this.watchMinutes.TabIndex = 6;
             this.watchMinutes.Text = "0";
             // 
@@ -206,7 +210,7 @@
             this.watchSeconds.Location = new System.Drawing.Point(507, 188);
             this.watchSeconds.Name = "watchSeconds";
             this.watchSeconds.ReadOnly = true;
-            this.watchSeconds.Size = new System.Drawing.Size(100, 20);
+            this.watchSeconds.Size = new System.Drawing.Size(100, 26);
             this.watchSeconds.TabIndex = 7;
             this.watchSeconds.Text = "0";
             // 
@@ -324,7 +328,7 @@
             // 
             this.smallCal.Location = new System.Drawing.Point(206, 114);
             this.smallCal.Name = "smallCal";
-            this.smallCal.Size = new System.Drawing.Size(200, 20);
+            this.smallCal.Size = new System.Drawing.Size(200, 26);
             this.smallCal.TabIndex = 5;
             this.smallCal.ValueChanged += new System.EventHandler(this.SmallCal_ValueChanged);
             // 
@@ -387,7 +391,7 @@
             0,
             0});
             this.ageForm.Name = "ageForm";
-            this.ageForm.Size = new System.Drawing.Size(120, 20);
+            this.ageForm.Size = new System.Drawing.Size(120, 26);
             this.ageForm.TabIndex = 9;
             this.ageForm.Value = new decimal(new int[] {
             18,
@@ -444,9 +448,29 @@
             this.successBtn.TabIndex = 12;
             this.successBtn.Text = "Ваша заявка успешна отправлена!";
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(161, 256);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 26);
+            this.numericUpDown1.TabIndex = 5;
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.NumericUpDown1_ValueChanged);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::OOP_Lab3_1.Properties.Resources._1564314090_3;
+            this.pictureBox1.Location = new System.Drawing.Point(346, 202);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(240, 131);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            // 
             // Main
             // 
             this.ClientSize = new System.Drawing.Size(800, 449);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.testYCoord);
             this.Controls.Add(this.testXCoord);
             this.Controls.Add(this.testLbl);
@@ -459,6 +483,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.Mouse)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CatBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ageForm)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -502,6 +528,8 @@
         private System.Windows.Forms.CheckedListBox subCheckBox;
         private System.Windows.Forms.RadioButton nationCheckBtn;
         private System.Windows.Forms.Label successBtn;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

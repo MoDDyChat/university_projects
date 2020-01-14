@@ -123,6 +123,7 @@ namespace OOP_Lab3_1
             this.Controls.Remove(this.registerBtn);
             this.Controls.Remove(this.nationCheckBtn);
             this.Controls.Remove(this.progressBar);
+            this.Controls.Remove(this.successBtn);
         }
 
         //Удалить с формы объекты Планировщика
@@ -363,6 +364,12 @@ namespace OOP_Lab3_1
             progressBar.Enabled = false;
             subCheckBox.Enabled = false;
             ageForm.Enabled = false;
+        }
+
+        private void NumericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            var newSize = Convert.ToInt32(numericUpDown1.Value);
+            pictureBox1.Size = new Size(newSize * 10, newSize * 10);
         }
     }
 }
