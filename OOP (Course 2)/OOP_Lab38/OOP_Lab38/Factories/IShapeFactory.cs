@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOP_Lab38
+namespace OOP_Lab38.Factories
 {
     interface IShapeFactory
     {

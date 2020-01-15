@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.IO;
+using OOP_Lab38.Factories;
 
 namespace OOP_Lab38
 {
@@ -39,7 +40,7 @@ namespace OOP_Lab38
             y += dy;
         }
 
-        public virtual void Load(StreamReader sr)
+        public virtual void Load(StreamReader sr, ShapeFactory sf)
         {
             x = Convert.ToInt32(sr.ReadLine().Split('=')[1]);
             y = Convert.ToInt32(sr.ReadLine().Split('=')[1]);

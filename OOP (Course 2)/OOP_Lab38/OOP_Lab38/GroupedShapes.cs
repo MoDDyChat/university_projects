@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OOP_Lab38.Factories;
 
 namespace OOP_Lab38
 {
@@ -27,17 +28,17 @@ namespace OOP_Lab38
             groupShapes.Remove(shape);
         }
 
-        public override void Load(StreamReader sr)
+        public override void Load(StreamReader sr, ShapeFactory sf)
         {
             groupShapes.Clear();
             var count = Convert.ToInt32(sr.ReadLine().Split('=')[1]);
-            IShapeFactory factory = new ShapeFactory();
+            IShapeFactory factory = sf;
             Shape shape;
             for (int i = 0; i < count; i++)
             {
                 var code = sr.ReadLine();
                 shape = factory.createShape(code);
-                shape.Load(sr);
+                shape.Load(sr, sf);
                 Add(shape);
             }
         }
@@ -69,7 +70,7 @@ namespace OOP_Lab38
                 groupShapes.Current().Paint(g);
             }
             if (isSelected)
-                g.DrawRectangle(new Pen(Color.Gray, 1), x, y, width, height);
+                g.DrawRectangle(new Pen(Color.Black, 3), x, y, width, height);
         }
 
         public override void Move(int dx, int dy)

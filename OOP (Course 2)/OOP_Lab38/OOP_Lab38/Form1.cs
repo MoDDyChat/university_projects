@@ -9,12 +9,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OOP_Lab38.Factories;
 
 namespace OOP_Lab38
 {
     public partial class Form1 : System.Windows.Forms.Form
     {
         private Storage<Shape> shapes;
+        private ShapeFactory factory;
         public int GWidth;
         public int GHeight;
         public int shapeType = 1;
@@ -26,6 +28,7 @@ namespace OOP_Lab38
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PaintPanel, new object[] { true });
 
             shapes = new Storage<Shape>();
+            factory = new ShapeFactory();
 
             GWidth = 100;
             GHeight = 100;
@@ -242,7 +245,7 @@ namespace OOP_Lab38
             PaintPanel.Refresh();
         }
 
-        public void LoadFigures()
+        public void LoadFigures(ShapeFactory sf)
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -250,13 +253,13 @@ namespace OOP_Lab38
                 {
                     shapes.Clear();
                     var count = Convert.ToInt32(sr.ReadLine());
-                    IShapeFactory factory = new ShapeFactory();
+                    IShapeFactory factory = sf;
                     Shape shape;
                     for (int i = 0; i < count; i++)
                     {
                         var code = sr.ReadLine();
                         shape = factory.createShape(code);
-                        shape.Load(sr);
+                        shape.Load(sr, sf);
                         shapes.AddLast(shape);
                     }
                 }
@@ -350,7 +353,7 @@ namespace OOP_Lab38
 
         private void LoadFormFileBtn_Click(object sender, EventArgs e)
         {
-            LoadFigures();
+            LoadFigures(factory);
             PaintPanel.Refresh();
         }
     }

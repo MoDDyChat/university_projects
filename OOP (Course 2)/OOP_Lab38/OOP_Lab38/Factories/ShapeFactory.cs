@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOP_Lab38
+namespace OOP_Lab38.Factories
 {
-    class ShapeFactory : IShapeFactory
+    public class ShapeFactory : IShapeFactory
     {
         public Shape createShape(string shapeName, int x = 0, int y = 0, int width = 1, int height = 1)
         {
