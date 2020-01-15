@@ -32,12 +32,11 @@ namespace OOP_Lab38
         {
             groupShapes.Clear();
             var count = Convert.ToInt32(sr.ReadLine().Split('=')[1]);
-            IShapeFactory factory = sf;
             Shape shape;
             for (int i = 0; i < count; i++)
             {
                 var code = sr.ReadLine();
-                shape = factory.createShape(code);
+                shape = sf.createShape(code);
                 shape.Load(sr, sf);
                 Add(shape);
             }

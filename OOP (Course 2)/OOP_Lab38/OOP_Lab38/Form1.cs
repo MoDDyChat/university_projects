@@ -253,12 +253,11 @@ namespace OOP_Lab38
                 {
                     shapes.Clear();
                     var count = Convert.ToInt32(sr.ReadLine());
-                    IShapeFactory factory = sf;
                     Shape shape;
                     for (int i = 0; i < count; i++)
                     {
                         var code = sr.ReadLine();
-                        shape = factory.createShape(code);
+                        shape = sf.createShape(code);
                         shape.Load(sr, sf);
                         shapes.AddLast(shape);
                     }
