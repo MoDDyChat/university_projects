@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOP_Lab38
 {
-    public class Storage<T>
+    public class Storage<T> : ISubject
     {
         public class Node
         {
@@ -91,6 +91,7 @@ namespace OOP_Lab38
             }
             first = newNode;
             count++;
+            //notifyAll();
         }
 
         //Добавить элемент с конца списка
@@ -110,6 +111,7 @@ namespace OOP_Lab38
             last = newNode;
             current = newNode;
             count++;
+            //notifyAll();
         }
 
         public void Remove()
@@ -143,6 +145,7 @@ namespace OOP_Lab38
                     Next();
                 }
             }
+            //notifyAll();
         }
 
         public void Clear()
@@ -162,6 +165,33 @@ namespace OOP_Lab38
                     return;
                 }
             }
+            //notifyAll();
+        }
+
+        List<IObserver> observers = new List<IObserver>();
+        public void addObserver(IObserver observer)
+        {
+            observers.Add(observer);
+            observer.getSubjects().Add(this);
+        }
+
+        public void removeObserver(IObserver observer)
+        {
+            observers.Remove(observer);
+            observer.getSubjects().Remove(this);
+        }
+
+        public void notifyAll()
+        {
+            foreach (var ob in observers)
+            {
+                ob.OnSubjectChanged(this);
+            }
+        }
+
+        public List<IObserver> getObservers()
+        {
+            return observers;
         }
 
     }

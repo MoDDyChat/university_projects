@@ -50,9 +50,9 @@ namespace OOP_Lab38
             }
             else
             {
-                if (borderX == -1 && this.y + this.height >= borderY)
+                if (borderX == -1 && this.y + this.height + 2 >= borderY)
                     return true;
-                else if (borderY == -1 && this.x + this.width >= borderX)
+                else if (borderY == -1 && this.x + this.width + 2 >= borderX)
                     return true;
             }
             return false;

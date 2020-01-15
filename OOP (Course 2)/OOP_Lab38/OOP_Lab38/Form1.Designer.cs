@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.colorSwitch = new System.Windows.Forms.ColorDialog();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSplitButton3 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.saveToFileBtn = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadFormFileBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.CircleButton = new System.Windows.Forms.ToolStripMenuItem();
             this.RectButton = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +45,7 @@
             this.SelectAllButton = new System.Windows.Forms.ToolStripMenuItem();
             this.UnSelectAllButton = new System.Windows.Forms.ToolStripMenuItem();
             this.shapesToGroupBtn = new System.Windows.Forms.ToolStripMenuItem();
+            this.unGroupBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.sizeXBox = new System.Windows.Forms.ToolStripTextBox();
@@ -53,13 +57,15 @@
             this.CountLbl = new System.Windows.Forms.ToolStripLabel();
             this.testLbl = new System.Windows.Forms.ToolStripLabel();
             this.PaintPanel = new System.Windows.Forms.Panel();
-            this.unGroupBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripSplitButton3 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.saveToFileBtn = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadFormFileBtn = new System.Windows.Forms.ToolStripMenuItem();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.treeView = new OOP_Lab38.TreeViewObserver();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -86,6 +92,32 @@
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolBar";
             // 
+            // toolStripSplitButton3
+            // 
+            this.toolStripSplitButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripSplitButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToFileBtn,
+            this.loadFormFileBtn});
+            this.toolStripSplitButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton3.Image")));
+            this.toolStripSplitButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton3.Name = "toolStripSplitButton3";
+            this.toolStripSplitButton3.Size = new System.Drawing.Size(71, 29);
+            this.toolStripSplitButton3.Text = "Файл";
+            // 
+            // saveToFileBtn
+            // 
+            this.saveToFileBtn.Name = "saveToFileBtn";
+            this.saveToFileBtn.Size = new System.Drawing.Size(253, 30);
+            this.saveToFileBtn.Text = "Сохранить в файл";
+            this.saveToFileBtn.Click += new System.EventHandler(this.SaveToFileBtn_Click);
+            // 
+            // loadFormFileBtn
+            // 
+            this.loadFormFileBtn.Name = "loadFormFileBtn";
+            this.loadFormFileBtn.Size = new System.Drawing.Size(253, 30);
+            this.loadFormFileBtn.Text = "Загрузить из файла";
+            this.loadFormFileBtn.Click += new System.EventHandler(this.LoadFormFileBtn_Click);
+            // 
             // toolStripSplitButton2
             // 
             this.toolStripSplitButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -101,21 +133,21 @@
             // CircleButton
             // 
             this.CircleButton.Name = "CircleButton";
-            this.CircleButton.Size = new System.Drawing.Size(252, 30);
+            this.CircleButton.Size = new System.Drawing.Size(227, 30);
             this.CircleButton.Text = "Круг";
             this.CircleButton.Click += new System.EventHandler(this.CircleButton_Click);
             // 
             // RectButton
             // 
             this.RectButton.Name = "RectButton";
-            this.RectButton.Size = new System.Drawing.Size(252, 30);
+            this.RectButton.Size = new System.Drawing.Size(227, 30);
             this.RectButton.Text = "Прямоугольник";
             this.RectButton.Click += new System.EventHandler(this.RectButton_Click);
             // 
             // TriButton
             // 
             this.TriButton.Name = "TriButton";
-            this.TriButton.Size = new System.Drawing.Size(252, 30);
+            this.TriButton.Size = new System.Drawing.Size(227, 30);
             this.TriButton.Text = "Треугольник";
             this.TriButton.Click += new System.EventHandler(this.TriButton_Click);
             // 
@@ -182,6 +214,13 @@
             this.shapesToGroupBtn.Text = "Объединить в группу";
             this.shapesToGroupBtn.Click += new System.EventHandler(this.ShapesToGroupBtn_Click);
             // 
+            // unGroupBtn
+            // 
+            this.unGroupBtn.Name = "unGroupBtn";
+            this.unGroupBtn.Size = new System.Drawing.Size(323, 30);
+            this.unGroupBtn.Text = "Распустить группу";
+            this.unGroupBtn.Click += new System.EventHandler(this.UnGroupBtn_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -241,65 +280,67 @@
             // 
             // PaintPanel
             // 
-            this.PaintPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PaintPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.PaintPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PaintPanel.Location = new System.Drawing.Point(0, 32);
+            this.PaintPanel.Location = new System.Drawing.Point(0, 0);
             this.PaintPanel.Name = "PaintPanel";
-            this.PaintPanel.Size = new System.Drawing.Size(1341, 555);
+            this.PaintPanel.Size = new System.Drawing.Size(1115, 555);
             this.PaintPanel.TabIndex = 1;
             this.PaintPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.PaintPanel_Paint);
             this.PaintPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PaintPanel_MouseClick);
             this.PaintPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PaintPanel_MouseMove);
             // 
-            // unGroupBtn
-            // 
-            this.unGroupBtn.Name = "unGroupBtn";
-            this.unGroupBtn.Size = new System.Drawing.Size(323, 30);
-            this.unGroupBtn.Text = "Распустить группу";
-            this.unGroupBtn.Click += new System.EventHandler(this.UnGroupBtn_Click);
-            // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog";
             // 
-            // toolStripSplitButton3
+            // splitContainer1
             // 
-            this.toolStripSplitButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripSplitButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveToFileBtn,
-            this.loadFormFileBtn});
-            this.toolStripSplitButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton3.Image")));
-            this.toolStripSplitButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton3.Name = "toolStripSplitButton3";
-            this.toolStripSplitButton3.Size = new System.Drawing.Size(71, 29);
-            this.toolStripSplitButton3.Text = "Файл";
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.IsSplitterFixed = true;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 32);
+            this.splitContainer1.Name = "splitContainer1";
             // 
-            // saveToFileBtn
+            // splitContainer1.Panel1
             // 
-            this.saveToFileBtn.Name = "saveToFileBtn";
-            this.saveToFileBtn.Size = new System.Drawing.Size(253, 30);
-            this.saveToFileBtn.Text = "Сохранить в файл";
-            this.saveToFileBtn.Click += new System.EventHandler(this.SaveToFileBtn_Click);
+            this.splitContainer1.Panel1.Controls.Add(this.PaintPanel);
+            this.splitContainer1.Panel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 30);
             // 
-            // loadFormFileBtn
+            // splitContainer1.Panel2
             // 
-            this.loadFormFileBtn.Name = "loadFormFileBtn";
-            this.loadFormFileBtn.Size = new System.Drawing.Size(253, 30);
-            this.loadFormFileBtn.Text = "Загрузить из файла";
-            this.loadFormFileBtn.Click += new System.EventHandler(this.LoadFormFileBtn_Click);
+            this.splitContainer1.Panel2.Controls.Add(this.treeView);
+            this.splitContainer1.Size = new System.Drawing.Size(1341, 555);
+            this.splitContainer1.SplitterDistance = 1115;
+            this.splitContainer1.TabIndex = 2;
+            // 
+            // treeView
+            // 
+            this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView.HideSelection = false;
+            this.treeView.Location = new System.Drawing.Point(0, 0);
+            this.treeView.Name = "treeView";
+            this.treeView.ShowNodeToolTips = true;
+            this.treeView.Size = new System.Drawing.Size(222, 555);
+            this.treeView.TabIndex = 0;
+            this.treeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView_NodeMouseClick_1);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1341, 587);
-            this.Controls.Add(this.PaintPanel);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Form";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form_KeyDown);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -336,6 +377,8 @@
         private System.Windows.Forms.ToolStripDropDownButton toolStripSplitButton3;
         private System.Windows.Forms.ToolStripMenuItem saveToFileBtn;
         private System.Windows.Forms.ToolStripMenuItem loadFormFileBtn;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private TreeViewObserver treeView;
     }
 }
 

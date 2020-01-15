@@ -9,7 +9,7 @@ using OOP_Lab38.Factories;
 
 namespace OOP_Lab38
 {
-    public abstract class Shape
+    public abstract class Shape : ISubject, IObserver
     {
         public int x;
         public int y;
@@ -40,6 +40,14 @@ namespace OOP_Lab38
             y += dy;
         }
 
+        public virtual void selectiveInvert()
+        {
+            if (isSelected == true)
+                isSelected = false;
+            else
+                isSelected = true;
+        }
+
         public virtual void Load(StreamReader sr, ShapeFactory sf)
         {
             x = Convert.ToInt32(sr.ReadLine().Split('=')[1]);
@@ -47,6 +55,7 @@ namespace OOP_Lab38
             width = Convert.ToInt32(sr.ReadLine().Split('=')[1]);
             height = Convert.ToInt32(sr.ReadLine().Split('=')[1]);
             color = Color.FromArgb(Convert.ToInt32(sr.ReadLine().Split('=')[1]));
+            
         }
         public virtual void Save(StreamWriter sw)
         {
@@ -71,6 +80,44 @@ namespace OOP_Lab38
         public virtual Storage<Shape> getGroupElem()
         {
             return null;
+        }
+
+        List<IObserver> observers = new List<IObserver>();
+        List<ISubject> subjects = new List<ISubject>();
+
+        public void addObserver(IObserver _observer)
+        {
+            observers.Add(_observer);
+            _observer.getSubjects().Add(this);
+        }
+
+        public void removeObserver(IObserver _observer)
+        {
+            observers.Remove(_observer);
+            _observer.getSubjects().Remove(this);
+        }
+
+        public void notifyAll()
+        {
+            foreach (var ob in observers)
+            {
+                ob.OnSubjectChanged(this);
+            }
+        }
+
+        public List<IObserver> getObservers()
+        {
+            return observers;
+        }
+
+        public void OnSubjectChanged(ISubject subject)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ISubject> getSubjects()
+        {
+            return subjects;
         }
     }
 }

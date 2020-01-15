@@ -15,19 +15,23 @@ namespace OOP_Lab38
 {
     public partial class Form1 : System.Windows.Forms.Form
     {
-        private Storage<Shape> shapes;
+        public Storage<Shape> shapes;
         private ShapeFactory factory;
         public int GWidth;
         public int GHeight;
         public int shapeType = 1;
-
+        
         public Form1()
         {
             InitializeComponent();
-
+            
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PaintPanel, new object[] { true });
 
             shapes = new Storage<Shape>();
+            treeView.Shapes = shapes;
+
+            shapes.addObserver(treeView);
+
             factory = new ShapeFactory();
 
             GWidth = 100;
@@ -76,6 +80,7 @@ namespace OOP_Lab38
             }
             CountLbl.Text = "Элементов: " + shapes.Count.ToString();
             PaintPanel.Refresh();
+            shapes.notifyAll();
         }
 
         private void changeColorSelectedShapes()
@@ -111,6 +116,7 @@ namespace OOP_Lab38
                 shapes.Current().isSelected = true;
             }
             PaintPanel.Refresh();
+            shapes.notifyAll();
         }
 
         private void unSelectAll()
@@ -120,6 +126,7 @@ namespace OOP_Lab38
                 shapes.Current().isSelected = false;
             }
             PaintPanel.Refresh();
+            shapes.notifyAll();
         }
 
 
@@ -131,12 +138,16 @@ namespace OOP_Lab38
                 {
                     if (shapeType == 1)
                         shapes.AddFirst(new Circle(e.X - GWidth / 2, e.Y - GHeight / 2, GWidth, GHeight));
+
                     else if (shapeType == 2)
                         shapes.AddFirst(new Rectangle(e.X, e.Y - GHeight, GWidth, GHeight));
+                        
                     else if (shapeType == 3)
                         shapes.AddFirst(new Triangle(e.X, e.Y, GWidth, GHeight));
+                        
                 }
                 CountLbl.Text = "Элементов: " + shapes.Count.ToString();
+                shapes.notifyAll();
                 PaintPanel.Refresh();
             }
         }
@@ -243,6 +254,7 @@ namespace OOP_Lab38
             shapes.AddLast(group);
             CountLbl.Text = "Элементов: " + shapes.Count.ToString();
             PaintPanel.Refresh();
+            shapes.notifyAll();
         }
 
         public void LoadFigures(ShapeFactory sf)
@@ -262,6 +274,7 @@ namespace OOP_Lab38
                         shapes.AddLast(shape);
                     }
                 }
+                shapes.notifyAll();
             }
 
         }
@@ -299,6 +312,7 @@ namespace OOP_Lab38
                 }
             }
             CountLbl.Text = "Элементов: " + shapes.Count.ToString();
+            shapes.notifyAll();
             PaintPanel.Refresh();
         }
 
@@ -354,6 +368,33 @@ namespace OOP_Lab38
         {
             LoadFigures(factory);
             PaintPanel.Refresh();
+        }
+
+        private void TreeView_NodeMouseClick_1(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                e.Node.Toggle();
+            }
+            else
+            {
+                if (e.Node.Level > 0)
+                {
+                    e.Node.Checked = false;
+                    e.Node.Collapse(true);
+                    shapes.notifyAll();
+                    return;
+                }
+                treeView.Shapes.First();
+                for (int i = 0; i < e.Node.Index; i++)
+                {
+                    treeView.Shapes.Next();
+                }
+                treeView.Shapes.Current().selectiveInvert();
+                e.Node.Collapse(true);
+                shapes.notifyAll();
+                PaintPanel.Refresh();
+            }
         }
     }
 }
