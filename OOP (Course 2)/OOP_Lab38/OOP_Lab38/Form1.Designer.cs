@@ -46,6 +46,7 @@
             this.UnSelectAllButton = new System.Windows.Forms.ToolStripMenuItem();
             this.shapesToGroupBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.unGroupBtn = new System.Windows.Forms.ToolStripMenuItem();
+            this.setStickyBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.sizeXBox = new System.Windows.Forms.ToolStripTextBox();
@@ -160,7 +161,8 @@
             this.SelectAllButton,
             this.UnSelectAllButton,
             this.shapesToGroupBtn,
-            this.unGroupBtn});
+            this.unGroupBtn,
+            this.setStickyBtn});
             this.toolStripSplitButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSplitButton1.Name = "toolStripSplitButton1";
@@ -220,6 +222,13 @@
             this.unGroupBtn.Size = new System.Drawing.Size(323, 30);
             this.unGroupBtn.Text = "Распустить группу";
             this.unGroupBtn.Click += new System.EventHandler(this.UnGroupBtn_Click);
+            // 
+            // setStickyBtn
+            // 
+            this.setStickyBtn.Name = "setStickyBtn";
+            this.setStickyBtn.Size = new System.Drawing.Size(323, 30);
+            this.setStickyBtn.Text = "Переключить липкость";
+            this.setStickyBtn.Click += new System.EventHandler(this.SetStickyBtn_Click);
             // 
             // toolStripSeparator1
             // 
@@ -315,6 +324,7 @@
             // 
             // treeView
             // 
+            this.treeView.CheckBoxes = true;
             this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView.HideSelection = false;
             this.treeView.Location = new System.Drawing.Point(0, 0);
@@ -379,6 +389,7 @@
         private System.Windows.Forms.ToolStripMenuItem loadFormFileBtn;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private TreeViewObserver treeView;
+        private System.Windows.Forms.ToolStripMenuItem setStickyBtn;
     }
 }
 

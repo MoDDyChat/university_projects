@@ -12,7 +12,7 @@ namespace OOP_Lab38
 
         void removeObserver(IObserver _observer);
 
-        void notifyAll();
+        void notifyAll(int dx, int dy);
 
         List<IObserver> getObservers();
     }

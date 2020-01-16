@@ -28,8 +28,10 @@ namespace OOP_Lab38
             point2 = new Point(this.x + this.width, this.y + this.height);
             point3 = new Point(this.x + this.width / 2, this.y);
             Point[] points = { point1, point2, point3 };
-            g.FillPolygon(new SolidBrush(this.color), points);
             g.DrawPolygon(new Pen(Color.Gray, 1), points);
+            g.FillPolygon(new SolidBrush(this.color), points);
+            if (isSticky)
+                g.FillPolygon(new SolidBrush(Color.LightGreen), points);
             if (isSelected)
                 g.DrawPolygon(new Pen(Color.Black, 3), points);
         }

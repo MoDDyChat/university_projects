@@ -22,6 +22,8 @@ namespace OOP_Lab38
         {
             g.FillEllipse(new SolidBrush(this.color), x, y, width, height);
             g.DrawEllipse(new Pen(Color.Gray, 1), x, y, width, height);
+            if (isSticky)
+                g.FillEllipse(new SolidBrush(Color.LightGreen), x, y, width, height);
             if (isSelected)
                 g.DrawEllipse(new Pen(Color.Black, 3), x, y, width, height);
         }

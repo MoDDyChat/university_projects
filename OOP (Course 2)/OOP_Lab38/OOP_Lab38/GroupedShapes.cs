@@ -32,6 +32,7 @@ namespace OOP_Lab38
         {
             groupShapes.Clear();
             var count = Convert.ToInt32(sr.ReadLine().Split('=')[1]);
+            isSticky = Convert.ToBoolean(sr.ReadLine().Split('=')[1]);
             Shape shape;
             for (int i = 0; i < count; i++)
             {
@@ -46,6 +47,7 @@ namespace OOP_Lab38
         {
             sw.WriteLine("G");
             sw.WriteLine($"count={groupShapes.Count}");
+            sw.WriteLine($"isSticky={isSticky}");
             for (groupShapes.First(); !groupShapes.isEnd(); groupShapes.Next())
             {
                 groupShapes.Current().Save(sw);

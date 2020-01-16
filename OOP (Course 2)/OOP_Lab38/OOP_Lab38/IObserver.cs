@@ -8,7 +8,7 @@ namespace OOP_Lab38
 {
     public interface IObserver
     {
-        void OnSubjectChanged(ISubject subject);
+        void OnSubjectChanged(ISubject subject, int dx, int dy);
 
         List<ISubject> getSubjects();
     }

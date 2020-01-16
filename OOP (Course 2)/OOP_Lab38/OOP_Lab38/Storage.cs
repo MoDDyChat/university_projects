@@ -47,6 +47,11 @@ namespace OOP_Lab38
                 return default(T);
         }
 
+        public T FirstNode()
+        {
+            return first.Value;
+        }
+
         //Количество элементов в хранилище
         private int count = 0;
         public int Count { get => count; }
@@ -181,11 +186,11 @@ namespace OOP_Lab38
             observer.getSubjects().Remove(this);
         }
 
-        public void notifyAll()
+        public void notifyAll(int dx, int dy)
         {
             foreach (var ob in observers)
             {
-                ob.OnSubjectChanged(this);
+                ob.OnSubjectChanged(this, 0, 0);
             }
         }
 

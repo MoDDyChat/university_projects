@@ -18,7 +18,7 @@ namespace OOP_Lab38
             CheckBoxes = true;
         }
 
-        public void OnSubjectChanged(ISubject subject)
+        public void OnSubjectChanged(ISubject subject, int dx, int dy)
         {
             this.Nodes.Clear();
             if (subject is Storage<Shape> shapes)
@@ -36,20 +36,25 @@ namespace OOP_Lab38
         void FillNode(Storage<Shape> shapes, TreeNodeCollection nodes)
         {
             TreeNode node;
+            int i = 0;
             for (shapes.First(); !shapes.isEnd(); shapes.Next())
             {
-                string shapeName;
+
+                string shapeName = "";
+                if (shapes.Current().isSticky)
+                    shapeName = "Sticky ";
+                else if (shapes.Current().getSubjects().Count > 0)
+                    shapeName = "Stuck ";
                 if (shapes.Current() is Rectangle)
-                    shapeName = "Rectangle";
+                    shapeName += "Rectangle" + i++;
                 else if (shapes.Current() is Triangle)
-                    shapeName = "Triangle";
+                    shapeName += "Triangle" + i++;
                 else if (shapes.Current() is Circle)
-                    shapeName = "Circle";
+                    shapeName += "Circle" + i++;
                 else
-                    shapeName = "Group";
+                    shapeName += "Group" + i++;
 
                 node = nodes.Add(shapeName);
-
                 node.Checked = shapes.Current().isSelected;
 
                 if (shapes.Current() is GroupedShapes group)

@@ -16,6 +16,7 @@ namespace OOP_Lab38
         public int width;
         public int height;
         public bool isSelected;
+        public bool isSticky;
         public Color color = Color.Yellow;
 
         public void Unselect()
@@ -55,6 +56,7 @@ namespace OOP_Lab38
             width = Convert.ToInt32(sr.ReadLine().Split('=')[1]);
             height = Convert.ToInt32(sr.ReadLine().Split('=')[1]);
             color = Color.FromArgb(Convert.ToInt32(sr.ReadLine().Split('=')[1]));
+            isSticky = Convert.ToBoolean(sr.ReadLine().Split('=')[1]);
             
         }
         public virtual void Save(StreamWriter sw)
@@ -64,6 +66,7 @@ namespace OOP_Lab38
             sw.WriteLine($"width={width}");
             sw.WriteLine($"height={height}");
             sw.WriteLine($"color={color.ToArgb()}");
+            sw.WriteLine($"isSticky={isSticky}");
         }
 
         public virtual void changeSize(int x, int y)
@@ -97,11 +100,20 @@ namespace OOP_Lab38
             _observer.getSubjects().Remove(this);
         }
 
-        public void notifyAll()
+        public void notifyAll(int dx, int dy)
         {
             foreach (var ob in observers)
             {
-                ob.OnSubjectChanged(this);
+                ob.OnSubjectChanged(this, dx, dy);
+            }
+        }
+
+        public void RemoveAllObserver()
+        {
+            int count = observers.Count;
+            for (int i = 0; i < count; i++)
+            {
+                removeObserver(observers[0]);
             }
         }
 
@@ -110,14 +122,19 @@ namespace OOP_Lab38
             return observers;
         }
 
-        public void OnSubjectChanged(ISubject subject)
+        public void OnSubjectChanged(ISubject subject, int dx, int dy)
         {
-            throw new NotImplementedException();
+            Move(dx, dy);
         }
 
         public List<ISubject> getSubjects()
         {
             return subjects;
+        }
+
+        public bool isObserver(IObserver observer)
+        {
+            return observers.Contains(observer);
         }
     }
 }

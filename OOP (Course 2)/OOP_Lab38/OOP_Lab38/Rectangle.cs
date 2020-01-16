@@ -20,8 +20,10 @@ namespace OOP_Lab38
 
         public override void Paint(Graphics g)
         {
-            g.FillRectangle(new SolidBrush(this.color), x, y, width, height);
             g.DrawRectangle(new Pen(Color.Gray, 1), x, y, width, height);
+            g.FillRectangle(new SolidBrush(this.color), x, y, width, height);
+            if (isSticky)
+                g.FillRectangle(new SolidBrush(Color.LightGreen), x, y, width, height);
             if (isSelected)
                 g.DrawRectangle(new Pen(Color.Black, 3), x, y, width, height);
         }

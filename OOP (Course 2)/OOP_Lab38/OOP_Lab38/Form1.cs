@@ -16,7 +16,9 @@ namespace OOP_Lab38
     public partial class Form1 : System.Windows.Forms.Form
     {
         public Storage<Shape> shapes;
-        private ShapeFactory factory;
+        public ShapeFactory factory;
+        public Dictionary<Shape, List<IObserver>> shapeObservers;
+
         public int GWidth;
         public int GHeight;
         public int shapeType = 1;
@@ -29,9 +31,8 @@ namespace OOP_Lab38
 
             shapes = new Storage<Shape>();
             treeView.Shapes = shapes;
-
+            shapeObservers = new Dictionary<Shape, List<IObserver>>();
             shapes.addObserver(treeView);
-
             factory = new ShapeFactory();
 
             GWidth = 100;
@@ -74,13 +75,20 @@ namespace OOP_Lab38
             while(!shapes.isEnd())
             {
                 if (shapes.Current().isSelected == true)
+                {
+                    if (shapes.Current().isSticky)
+                    {
+                        shapes.Current().isSticky = false;
+                        shapes.Current().RemoveAllObserver();
+                    }
                     shapes.Remove();
+                }
                 else
                     shapes.Next();
             }
             CountLbl.Text = "Элементов: " + shapes.Count.ToString();
             PaintPanel.Refresh();
-            shapes.notifyAll();
+            shapes.notifyAll(0, 0);
         }
 
         private void changeColorSelectedShapes()
@@ -116,7 +124,7 @@ namespace OOP_Lab38
                 shapes.Current().isSelected = true;
             }
             PaintPanel.Refresh();
-            shapes.notifyAll();
+            shapes.notifyAll(0, 0);
         }
 
         private void unSelectAll()
@@ -126,7 +134,7 @@ namespace OOP_Lab38
                 shapes.Current().isSelected = false;
             }
             PaintPanel.Refresh();
-            shapes.notifyAll();
+            shapes.notifyAll(0, 0);
         }
 
 
@@ -147,14 +155,14 @@ namespace OOP_Lab38
                         
                 }
                 CountLbl.Text = "Элементов: " + shapes.Count.ToString();
-                shapes.notifyAll();
+                shapes.notifyAll(0, 0);
                 PaintPanel.Refresh();
             }
         }
 
         private void PaintPanel_Paint(object sender, PaintEventArgs e)
         {
-            var graphic = e.Graphics;
+            Graphics graphic = e.Graphics;
             for (shapes.First(); !shapes.isEnd(); shapes.Next())
                 shapes.Current().Paint(graphic);
         }
@@ -198,7 +206,7 @@ namespace OOP_Lab38
                     if (shape.borderCheck(bx, by, isUp))
                     {
                         shape.Move(-dx, -dy);
-                    }
+                    }      
                 }
             }
             PaintPanel.Refresh();
@@ -209,15 +217,19 @@ namespace OOP_Lab38
             switch(e.KeyCode)
             {
                 case Keys.Up:
+                    stickObjects(shapes, 0, -5);
                     MoveShape(0, -5, -1, 0, true);
                     break;
                 case Keys.Left:
+                    stickObjects(shapes, -5, 0);
                     MoveShape(-5, 0, 0, -1, true);
                     break;
                 case Keys.Down:
+                    stickObjects(shapes, 0, 5);
                     MoveShape(0, 5, -1, PaintPanel.Size.Height, false);
                     break;
                 case Keys.Right:
+                    stickObjects(shapes, 5, 0);
                     MoveShape(5, 0, PaintPanel.Size.Width, -1, false);
                     break;
                 case Keys.A:
@@ -254,7 +266,7 @@ namespace OOP_Lab38
             shapes.AddLast(group);
             CountLbl.Text = "Элементов: " + shapes.Count.ToString();
             PaintPanel.Refresh();
-            shapes.notifyAll();
+            shapes.notifyAll(0, 0);
         }
 
         public void LoadFigures(ShapeFactory sf)
@@ -274,7 +286,7 @@ namespace OOP_Lab38
                         shapes.AddLast(shape);
                     }
                 }
-                shapes.notifyAll();
+                shapes.notifyAll(0, 0);
             }
 
         }
@@ -292,6 +304,68 @@ namespace OOP_Lab38
             }
         }
 
+        public void setSticky()
+        {
+            for (shapes.First(); !shapes.isEnd(); shapes.Next())
+            {
+                if (shapes.Current().isSelected)
+                {
+                    if (shapes.Current().isSticky == false)
+                        shapes.Current().isSticky = true;
+                    else
+                    {
+                        shapes.Current().isSticky = false;
+                        shapes.Current().RemoveAllObserver();
+                    }
+                } 
+            }
+            shapes.notifyAll(0, 0);
+            PaintPanel.Refresh();
+        }
+
+        public void stickObjects(Storage<Shape> _shapes, int dx, int dy)
+        {
+            for (_shapes.First(); !_shapes.isEnd(); _shapes.Next())
+            {
+                if (_shapes.Current().isSelected)
+                {
+                    bool flag = true;
+                    var stickShape = _shapes.Current();
+                    if (stickShape.isSticky)
+                    {
+                        for (_shapes.First(); !_shapes.isEnd(); _shapes.Next())
+                        {
+                            Shape compareShape = _shapes.Current();
+
+                            if (!stickShape.Equals(compareShape))
+                            {
+                                for (int i = stickShape.x; i <= stickShape.x + stickShape.width && flag == true; i++)
+                                {
+                                    for (int j = stickShape.y; j < stickShape.y + stickShape.height && flag == true; j++)
+                                    {
+                                        if (stickShape.lookAtShape(i, j) && compareShape.lookAtShape(i, j))
+                                        {
+                                            if (!stickShape.isObserver(compareShape))
+                                            {
+                                                stickShape.addObserver(compareShape);
+                                            }
+                                            flag = false;
+                                        }
+                                    }
+                                }
+                                if (stickShape.isObserver(compareShape) && flag == true)
+                                {
+                                    stickShape.removeObserver(compareShape);
+                                }
+                                flag = true;
+                            }
+                        }
+                    }
+                    stickShape.notifyAll(dx, dy);
+                }
+            }
+            _shapes.notifyAll(0, 0);
+        }  
 
         public void shapesUngroup()
         {
@@ -312,7 +386,7 @@ namespace OOP_Lab38
                 }
             }
             CountLbl.Text = "Элементов: " + shapes.Count.ToString();
-            shapes.notifyAll();
+            shapes.notifyAll(0, 0);
             PaintPanel.Refresh();
         }
 
@@ -382,7 +456,7 @@ namespace OOP_Lab38
                 {
                     e.Node.Checked = false;
                     e.Node.Collapse(true);
-                    shapes.notifyAll();
+                    shapes.notifyAll(0, 0);
                     return;
                 }
                 treeView.Shapes.First();
@@ -392,9 +466,16 @@ namespace OOP_Lab38
                 }
                 treeView.Shapes.Current().selectiveInvert();
                 e.Node.Collapse(true);
-                shapes.notifyAll();
+                shapes.notifyAll(0, 0);
                 PaintPanel.Refresh();
             }
         }
+
+        private void SetStickyBtn_Click(object sender, EventArgs e)
+        {
+            setSticky();
+        }
+
+        
     }
 }
