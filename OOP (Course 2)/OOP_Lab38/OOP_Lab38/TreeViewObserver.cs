@@ -46,13 +46,13 @@ namespace OOP_Lab38
                 else if (shapes.Current().getSubjects().Count > 0)
                     shapeName = "Stuck ";
                 if (shapes.Current() is Rectangle)
-                    shapeName += "Rectangle" + i++;
+                    shapeName += "Rectangle";
                 else if (shapes.Current() is Triangle)
-                    shapeName += "Triangle" + i++;
+                    shapeName += "Triangle";
                 else if (shapes.Current() is Circle)
-                    shapeName += "Circle" + i++;
+                    shapeName += "Circle";
                 else
-                    shapeName += "Group" + i++;
+                    shapeName += "Group";
 
                 node = nodes.Add(shapeName);
                 node.Checked = shapes.Current().isSelected;

@@ -149,7 +149,7 @@ namespace Network_Lab31_Adresses
                     else
                         Out = String.Format("{0,-40} {1, -40} {2}", ipStr, pr.Status, "Exception thrown");
                 }
-                Output.Text = Output.Text + Out + "\n";
+                Output.Text = Output.Text + Out + Environment.NewLine;
                 ipNum++;
             }
         }
