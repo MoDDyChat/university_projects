@@ -129,12 +129,15 @@ namespace SiAKOD_RGR
             textBox.Clear();
             textBox.Text = "Суммарное расстояние до других городов:" + Environment.NewLine;
 
+            foreach (City city in cities)
+                city.ValueSum = 0;
+
             foreach (City curCity in cities)
             {
                 curCity.Color = Color.LightGoldenrodYellow;
                 paintBox.Refresh();
-
                 curCity.Value = 0;
+                
                 dek.startAlg(curCity);
 
                 curCity.Color = Color.LightGreen;
@@ -154,7 +157,6 @@ namespace SiAKOD_RGR
 
                 textBox.Text += "Город #" + curCity.Text + ": " + curCity.ValueSum + Environment.NewLine;
                 System.Threading.Thread.Sleep(800);
-                
             }
             minValueCity.Color = Color.Yellow;
             paintBox.Refresh();
